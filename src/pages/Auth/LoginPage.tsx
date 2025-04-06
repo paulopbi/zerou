@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
-import InputWithLabel from "../../components/ui/InputWithLabel";
-import styles from "./Login.module.css";
-import Button from "../../components/ui/Button";
 import { Link } from "react-router";
+import InputWithLabel from "../../components/ui/InputWithLabel";
+import styles from "./LoginPage.module.css";
+import Button from "../../components/ui/Button";
 
 const LoginPage = () => {
   return (
