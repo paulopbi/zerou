@@ -1,0 +1,57 @@
+/* playfair font */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+/* geist font */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+:root {
+  --font-geist: "Geist";
+  --font-playfair: "Playfair Display";
+
+  --color-background: #fcfcfc;
+  --color-brand: #1753a2;
+  --color-white: #fff;
+  --color-black: #1a1a1a;
+  --color-gray: #474747;
+  --color-danger: #fe8c8c;
+  --color-danger-dark: #470000;
+  --color-sucess: #77ef71;
+  --color-sucess-dark: #044c00;
+  --color-gray-opacity: rgba(71, 71, 71, 0.8);
+
+  --text-size-xl: 48px;
+  --text-size-md: 20px;
+  --text-size-base: 16px;
+  --text-size-xs: 14px;
+
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-base: 16px;
+  --gap-lg: 20px;
+  --gap-xl: 24px;
+
+  --border-xs: 4px;
+
+  --smooth-transition: all 0.4s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Geist", sans-serif;
+  color: var(--color-black);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-geist);
+}
