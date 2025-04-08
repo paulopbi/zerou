@@ -16,6 +16,11 @@
   transition: var(--smooth-transition);
 }
 
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .btn-primary {
   color: var(--color-background);
   background-color: var(--color-brand);
