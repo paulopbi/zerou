@@ -1,17 +1,21 @@
 //react
 import React from "react";
 //css
-import styles from "./CreateAccount.module.css";
+import styles from "./CreateAccountPage.module.css";
 //components
 import InputWithLabel from "../components/ui/InputWithLabel";
 import Button from "../components/ui/Button";
 //lib's
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig";
 
-const CreateAccount = () => {
+const CreateAccountPage = () => {
+  //react router
+  const navigate = useNavigate();
+
+  //use state
   const [displayName, setDisplayName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -47,10 +51,11 @@ const CreateAccount = () => {
       );
 
       //update the user info for new data
-      const response = await updateProfile(newUser.user, {
+      await updateProfile(newUser.user, {
         displayName: formData.displayName,
       });
-      console.log(response);
+
+      navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         setErros(error);
@@ -136,4 +141,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default CreateAccountPage;
