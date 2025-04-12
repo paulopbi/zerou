@@ -4,9 +4,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 
 :root {
+  /* font family */
   --font-geist: "Geist";
   --font-playfair: "Playfair Display";
 
+  /* font weight */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+
+  /* colors */
   --color-background: #fcfcfc;
   --color-brand: #1753a2;
   --color-white: #fff;
@@ -19,11 +28,13 @@
   --color-sucess-dark: #044c00;
   --color-gray-opacity: rgba(71, 71, 71, 0.8);
 
-  --text-size-xl: 48px;
-  --text-size-md: 20px;
-  --text-size-base: 16px;
-  --text-size-xs: 14px;
+  /* font size */
+  --text-size-xl: 3rem;
+  --text-size-md: 1.25rem;
+  --text-size-base: 1rem;
+  --text-size-xs: 0.875rem;
 
+  /* gap */
   --gap-xs: 4px;
   --gap-sm: 8px;
   --gap-md: 12px;
@@ -31,8 +42,10 @@
   --gap-lg: 20px;
   --gap-xl: 24px;
 
+  /* border */
   --border-xs: 4px;
 
+  /* transition */
   --smooth-transition: all 0.4s ease;
 }
 
@@ -57,6 +70,14 @@ button {
   font-family: var(--font-geist);
 }
 
-.error {
-  color: var(--color-error-text);
+input:placeholder {
+  font-family: inherit;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
+  padding-inline: 16px;
 }
