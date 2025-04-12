@@ -5,12 +5,14 @@ import { AuthProvider } from "./context/AuthContextProvider";
 import HomePage from "./pages/Home/HomePage";
 import CreateAccountPage from "./pages/Auth/CreateAccountPage";
 import LoginPage from "./pages/Auth/LoginPage";
-import PrivateRoute from "./pages/components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
+import Navbar from "./components/ui/Navbar";
 
 const App = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route
             path="/"
