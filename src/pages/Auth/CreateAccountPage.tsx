@@ -8,25 +8,25 @@ import Button from "../components/ui/Button";
 //lib's
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase/firebaseConfig";
+import { useAuth } from "../../hooks/useAuth";
 
 const CreateAccountPage = () => {
   //react router
   const navigate = useNavigate();
-
   //use state
   const [displayName, setDisplayName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [errors, setErros] = React.useState<null | Error>(null);
+  const [errors, setErros] = React.useState("");
 
+  //auth custom hook
+  const { register } = useAuth();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErros("");
     const passwordSize = 6;
 
-    setErros(null);
     try {
       const formData = {
         displayName,
@@ -35,32 +35,25 @@ const CreateAccountPage = () => {
         confirmPassword,
       };
 
-      if (password !== confirmPassword) {
-        throw new Error("As senhas devem ser iguais");
+      if (formData.password !== formData.confirmPassword) {
+        throw new Error("A senha e a confirmação de senha devem ser iguais");
       }
 
-      if (password.length < passwordSize) {
-        throw new Error(`A senha deve conter ${passwordSize} caracteres`);
+      if (formData.password.length < passwordSize) {
+        throw new Error(`A senha precisa ter ${passwordSize} caracteres`);
       }
 
       //create a new user
-      const newUser = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-
-      //update the user info for new data
-      await updateProfile(newUser.user, {
-        displayName: formData.displayName,
-      });
-
+      register(formData);
+      //redirect
       navigate("/");
     } catch (error) {
       if (error instanceof Error) {
-        setErros(error);
+        setErros(error.message);
+        console.error(error.message);
+        return;
       }
-      console.error(error);
+      console.log("Algo deu errado, tente novamente mais tarde!");
     }
   };
   return (
@@ -124,7 +117,7 @@ const CreateAccountPage = () => {
           </div>
 
           {/* error handler */}
-          {errors && <p className="error">{errors.message}</p>}
+          {errors && <p className="error">{errors}</p>}
 
           {/* button */}
           <div className={styles.formFooter}>
