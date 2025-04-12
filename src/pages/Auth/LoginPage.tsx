@@ -8,8 +8,9 @@ import Button from "../../components/ui/Button";
 //lib's
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebaseConfig";
+import { FirebaseError } from "firebase/app";
+import { firebaseErrorHandler } from "../../firebase/firebaseErrorHandler";
+import { useAuth } from "../../hooks/useAuth";
 
 const LoginPage = () => {
   //react router
@@ -20,10 +21,11 @@ const LoginPage = () => {
   const [password, setPassword] = React.useState("");
   const [errors, setErros] = React.useState("");
 
+  //context api hook
+  const { login } = useAuth();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErros("");
-    const passwordSize = 6;
 
     try {
       const formData = {
@@ -31,21 +33,17 @@ const LoginPage = () => {
         password,
       };
 
-      if (!email || !password) {
+      if (!formData.email || !formData.password) {
         throw new Error("Todos os campos devem ser preenchidos");
       }
 
-      if (password.length < passwordSize) {
-        throw new Error(`A senha precisa ter ${passwordSize} caracteres`);
-      }
-
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-
+      login(formData.email, formData.password);
       navigate("/");
     } catch (error) {
-      if (error instanceof Error) {
-        setErros(error.message);
-        console.error(error.message);
+      if (error instanceof FirebaseError) {
+        setErros(firebaseErrorHandler(error));
+        console.error(error.code);
+        return;
       }
       console.error(error);
       setErros("Algo deu errado, tente novamente mais tarde!");
@@ -76,6 +74,7 @@ const LoginPage = () => {
               required
             />
           </div>
+
           {/* password */}
           <div className={styles.formGroup}>
             <InputWithLabel

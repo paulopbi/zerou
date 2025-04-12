@@ -9,22 +9,27 @@ import Button from "../../components/ui/Button";
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
+import { FirebaseError } from "firebase/app";
+import { firebaseErrorHandler } from "../../firebase/firebaseErrorHandler";
 
 const CreateAccountPage = () => {
   //react router
   const navigate = useNavigate();
+
   //use state
   const [displayName, setDisplayName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [errors, setErros] = React.useState("");
+  const [error, setErro] = React.useState("");
 
-  //auth custom hook
+  //context api hook
   const { register } = useAuth();
+
+  //form submit handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErros("");
+    setErro("");
     const passwordSize = 6;
 
     try {
@@ -43,14 +48,17 @@ const CreateAccountPage = () => {
         throw new Error(`A senha precisa ter ${passwordSize} caracteres`);
       }
 
-      //create a new user
-      register(formData);
-      //redirect
+      const registerStatus = await register(formData);
+
+      if (!registerStatus) {
+        throw new Error("Algo deu errado, tente novamente mais tarde!");
+      }
+
       navigate("/");
     } catch (error) {
-      if (error instanceof Error) {
-        setErros(error.message);
-        console.error(error.message);
+      if (error instanceof FirebaseError) {
+        setErro(firebaseErrorHandler(error));
+        console.error(error.code);
         return;
       }
       console.log("Algo deu errado, tente novamente mais tarde!");
@@ -79,6 +87,7 @@ const CreateAccountPage = () => {
               required
             />
           </div>
+
           {/* email */}
           <div className={styles.formGroup}>
             <InputWithLabel
@@ -91,6 +100,7 @@ const CreateAccountPage = () => {
               required
             />
           </div>
+
           {/* password */}
           <div className={styles.formGroup}>
             <InputWithLabel
@@ -103,6 +113,7 @@ const CreateAccountPage = () => {
               required
             />
           </div>
+
           {/* confirm password */}
           <div className={styles.formGroup}>
             <InputWithLabel
@@ -117,7 +128,7 @@ const CreateAccountPage = () => {
           </div>
 
           {/* error handler */}
-          {errors && <p className="error">{errors}</p>}
+          {error && <p className="error">{error}</p>}
 
           {/* button */}
           <div className={styles.formFooter}>
