@@ -3,8 +3,8 @@ import React from "react";
 //css
 import styles from "./LoginPage.module.css";
 //components
-import InputWithLabel from "../components/ui/InputWithLabel";
-import Button from "../components/ui/Button";
+import InputWithLabel from "../../components/ui/InputWithLabel";
+import Button from "../../components/ui/Button";
 //lib's
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
