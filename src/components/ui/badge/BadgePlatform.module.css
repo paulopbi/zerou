@@ -1,0 +1,39 @@
+:root {
+  /* games color */
+  --color-xbox: #107c10;
+  --color-xbox-bg: #c6e3c6;
+  --color-playstation: #0052cc;
+  --color-playstation-bg: #c3d5f8;
+  --color-nintendo: #e60012;
+  --color-nintendo-bg: #f9c3c7;
+  --color-pc: #333;
+  --color-pc-bg: #d1d1d1;
+  --color-steam-deck: #2a475e;
+  --color-steam-deck-bg: #c2d0dc;
+  --color-mobile: #ff9500;
+  --color-mobile-bg: #ffe1b8;
+}
+
+.xbox {
+  color: var(--color-xbox-bg);
+  border-color: var(--color-xbox-bg);
+  background-color: var(--color-xbox);
+}
+
+.playstation {
+  color: var(--color-playstation-bg);
+  border-color: var(--color-playstation-bg);
+  background-color: var(--color-playstation);
+}
+
+.nintendo {
+  color: var(--color-nintendo-bg);
+  border-color: var(--color-nintendo-bg);
+  background-color: var(--color-nintendo);
+}
+
+.pc {
+  color: var(--color-pc);
+  border-color: var(--color-pc);
+  background-color: var(--color-pc-bg);
+}
