@@ -79,7 +79,7 @@
 
 /* links */
 .link {
-  font-size: var(--text-size-base);
+  font-size: var(--text-size-xs);
   color: var(--color-gray);
   transition: var(--smooth-transition);
 
@@ -91,7 +91,7 @@
 /* utility */
 .label {
   display: block;
-  font-size: var(--text-size-xs);
+  font-size: var(--text-size-sm);
   font-family: var(--font-geist);
   font-weight: 300;
   color: var(--color-gray-opacity);
@@ -103,4 +103,17 @@
 
 .error {
   color: var(--color-error-text);
+}
+
+.badge-base {
+  text-transform: capitalize;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  padding: 4px 8px;
+  font-size: var(--text-size-xs);
+  font-weight: var(--font-weight-semi-bold);
+  border-radius: var(--border-infinite);
 }
