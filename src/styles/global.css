@@ -5,8 +5,8 @@
 
 :root {
   /* font family */
-  --font-geist: "Geist";
-  --font-playfair: "Playfair Display";
+  --font-geist: "Geist", sans-serif;
+  --font-playfair: "Playfair Display", sans-serif;
 
   /* font weight */
   --font-weight-light: 300;
@@ -29,21 +29,23 @@
   --color-gray-opacity: rgba(71, 71, 71, 0.8);
 
   /* font size */
-  --text-size-xl: 3rem;
-  --text-size-md: 1.25rem;
-  --text-size-base: 1rem;
-  --text-size-xs: 0.875rem;
+  --text-size-xl: 3rem; /*48px*/
+  --text-size-md: 1.25rem; /*20px*/
+  --text-size-base: 1rem; /*16px*/
+  --text-size-xs: 0.875rem; /*14px*/
 
   /* gap */
-  --gap-xs: 4px;
-  --gap-sm: 8px;
-  --gap-md: 12px;
-  --gap-base: 16px;
-  --gap-lg: 20px;
-  --gap-xl: 24px;
+  --gap-xs: 0.25rem; /* 4px */
+  --gap-sm: 0.5rem; /* 8px */
+  --gap-md: 0.75rem; /* 12px */
+  --gap-base: 1rem; /* 16px */
+  --gap-lg: 1.25rem; /* 20px */
+  --gap-xl: 1.5rem; /* 24px */
+  --gap-xxl: 2rem; /* 32px */
 
   /* border */
-  --border-xs: 4px;
+  --border-xs: 0.25rem; /* 4px */
+  --border-infinite: 999rem; /* 999px */
 
   /* transition */
   --smooth-transition: all 0.4s ease;
@@ -54,7 +56,7 @@ html {
 }
 
 body {
-  font-family: "Geist", sans-serif;
+  font-family: var(--font-geist);
   color: var(--color-black);
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
@@ -77,6 +79,11 @@ input:placeholder {
 
 li {
   list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 .container {
