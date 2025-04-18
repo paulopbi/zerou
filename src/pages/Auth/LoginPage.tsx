@@ -1,7 +1,7 @@
 //react
 import React from "react";
 //css
-import styles from "./LoginPage.module.css";
+import "./LoginPage.css";
 //components
 import InputWithLabel from "../../components/ui/InputWithLabel";
 import Button from "../../components/ui/Button";
@@ -9,8 +9,10 @@ import Button from "../../components/ui/Button";
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { FirebaseError } from "firebase/app";
-import { firebaseErrorHandler } from "../../firebase/firebaseErrorHandler";
 import { useAuth } from "../../hooks/useAuth";
+import Alert from "../../components/ui/error/Alert";
+import { firebaseErrorHandler } from "../../firebase/firebaseErrorHandler";
+import { passwordTextSize } from "../../constants";
 
 const LoginPage = () => {
   //react router
@@ -19,51 +21,45 @@ const LoginPage = () => {
   //use state
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [errors, setErros] = React.useState("");
+  const [error, setError] = React.useState("");
 
   //context api hook
   const { login } = useAuth();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErros("");
+    setError("");
 
     try {
-      const formData = {
-        email,
-        password,
-      };
-
-      if (!formData.email || !formData.password) {
-        throw new Error("Todos os campos devem ser preenchidos");
-      }
-
-      login(formData.email, formData.password);
+      await login(email, password);
       navigate("/");
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        setErros(firebaseErrorHandler(error));
-        console.error(error.code);
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        const errorHandler = firebaseErrorHandler(err);
+        setError(errorHandler);
+        console.error(errorHandler);
         return;
       }
+
+      setError("Algo deu errado, tente novamente.");
       console.error(error);
-      setErros("Algo deu errado, tente novamente mais tarde!");
     }
   };
   return (
-    <section className={styles.login}>
+    <section className="login">
       <div className="container">
         {/* heading */}
-        <div className={styles.heading}>
-          <h1 className="title--main text-center">Zerou</h1>
+        <div className="login-heading">
+          <h1 className="text-center">Zerou</h1>
           <p className="description text-center">
             Organize sua jornada, anote tudo de importante nas suas aventuras.{" "}
           </p>
         </div>
 
         {/* inputs group */}
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
           {/* email */}
-          <div className={styles.formGroup}>
+          <div className="login-form-group">
             <InputWithLabel
               id="email"
               type="email"
@@ -76,12 +72,13 @@ const LoginPage = () => {
           </div>
 
           {/* password */}
-          <div className={styles.formGroup}>
+          <div className="login-form-group">
             <InputWithLabel
               id="password"
               type="password"
               label="Digite a sua senha"
-              placeholder="Digite sua senha"
+              placeholder="Sua senha secreta"
+              minLength={passwordTextSize}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -89,10 +86,10 @@ const LoginPage = () => {
           </div>
 
           {/* error handler */}
-          {errors && <p className="error">{errors}</p>}
+          {error && <Alert message={error} onlyText />}
 
           {/* button */}
-          <div className={styles.formFooter}>
+          <div className="login-submit-area">
             <Button title="Botão para criar conta" type="submit">
               Entrar <ArrowRight size={18} />
             </Button>
