@@ -1,19 +1,25 @@
 :root {
-  /* system colors */
+  /* design system colors */
   --color-background: #fcfcfc;
   --color-brand: #1753a2;
   --color-white: #fff;
   --color-black: #1a1a1a;
   --color-gray: #474747;
-  --color-danger: #fe8c8c;
-  --color-danger-dark: #470000;
-  --color-error-text: #850007;
-  --color-warning-dark: #856404;
-  --color-warning: #fff3cd;
-  --color-sucess: #77ef71;
-  --color-sucess-dark: #044c00;
-  --color-gray-opacity: rgba(71, 71, 71, 0.8);
   --color-light-blue: #eaeef7;
+
+  /* alert */
+  --color-danger: #fe8c8c;
+  --color-danger-light: #f5c6cb;
+  --color-danger-dark: #470000;
+  --color-warning: #fff3cd;
+  --color-warning-light: #ffeeba;
+  --color-warning-dark: #856404;
+  --color-sucess: #77ef71;
+  --color-sucess-light: #c3e6cb;
+  --color-sucess-dark: #044c00;
+  --color-info-dark: #0c5460;
+  --color-info-light: #bee5eb;
+  --color-info: #d1ecf1;
 
   /* games color */
   --color-xbox: #107c10;
