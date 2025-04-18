@@ -1,53 +1,10 @@
-/* playfair font */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
-/* geist font */
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+@import url("./reset.css");
+@import url("./colors.css");
+@import url("./typography.css");
+@import url("./border.css");
+@import url("./spacing.css");
 
 :root {
-  /* font family */
-  --font-geist: "Geist", sans-serif;
-  --font-playfair: "Playfair Display", sans-serif;
-
-  /* font weight */
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semi-bold: 600;
-  --font-weight-bold: 700;
-
-  /* colors */
-  --color-background: #fcfcfc;
-  --color-brand: #1753a2;
-  --color-white: #fff;
-  --color-black: #1a1a1a;
-  --color-gray: #474747;
-  --color-danger: #fe8c8c;
-  --color-danger-dark: #470000;
-  --color-error-text: #850007;
-  --color-sucess: #77ef71;
-  --color-sucess-dark: #044c00;
-  --color-gray-opacity: rgba(71, 71, 71, 0.8);
-
-  /* font size */
-  --text-size-xl: 3rem; /*48px*/
-  --text-size-md: 1.25rem; /*20px*/
-  --text-size-base: 1rem; /*16px*/
-  --text-size-xs: 0.875rem; /*14px*/
-
-  /* gap */
-  --gap-xs: 0.25rem; /* 4px */
-  --gap-sm: 0.5rem; /* 8px */
-  --gap-md: 0.75rem; /* 12px */
-  --gap-base: 1rem; /* 16px */
-  --gap-lg: 1.25rem; /* 20px */
-  --gap-xl: 1.5rem; /* 24px */
-  --gap-xxl: 2rem; /* 32px */
-
-  /* border */
-  --border-xs: 0.25rem; /* 4px */
-  --border-infinite: 999rem; /* 999px */
-
-  /* transition */
   --smooth-transition: all 0.4s ease;
 }
 
@@ -72,9 +29,31 @@ button {
   font-family: var(--font-geist);
 }
 
-input:placeholder {
+input {
   font-family: inherit;
-  color: rgba(0, 0, 0, 0.3);
+  font-weight: var(--font-weight-medium);
+  &:placeholder {
+    font-family: inherit;
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+select {
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  &::placeholder {
+    font-family: inherit;
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+textarea {
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  &::placeholder {
+    font-family: inherit;
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 li {
@@ -84,6 +63,35 @@ li {
 img {
   display: block;
   max-width: 100%;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+h4 {
+  font-size: var(--fs-h4);
+}
+
+h5 {
+  font-size: var(--fs-h5);
+}
+
+h6 {
+  font-size: var(--fs-h6);
+}
+
+p {
+  font-size: var(--fs-base);
+  color: var(--color-gray);
 }
 
 .container {
