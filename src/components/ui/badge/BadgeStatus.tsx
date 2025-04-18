@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./BadgeStatus.module.css";
+import "./BadgeStatus.css";
 
 interface IBadgeStatus {
   status: string;
@@ -9,41 +9,41 @@ interface IBadgeStatus {
 const BadgeStatus = ({ status, children }: IBadgeStatus) => {
   const normalizeStatusText = status.trim().toLowerCase();
 
-  if (normalizeStatusText === "finalizado") {
+  if (normalizeStatusText === "completed") {
     return (
-      <div className={`badge-base ${styles.completed}`}>
+      <div className="badge-base completed">
         <span>{children}</span>
       </div>
     );
   }
 
-  if (normalizeStatusText === "jogando") {
+  if (normalizeStatusText === "playing") {
     return (
-      <div className={`badge-base ${styles.playing}`}>
+      <div className="badge-base playing">
         <span>{children}</span>
       </div>
     );
   }
 
-  if (normalizeStatusText === "na lista") {
+  if (normalizeStatusText === "wishlist") {
     return (
-      <div className={`badge-base ${styles.wishlist}`}>
+      <div className="badge-base wishlist">
         <span>{children}</span>
       </div>
     );
   }
 
-  if (normalizeStatusText === "rejogando") {
+  if (normalizeStatusText === "replaying") {
     return (
-      <div className={`badge-base ${styles.replaying}`}>
+      <div className="badge-base replaying">
         <span>{children}</span>
       </div>
     );
   }
 
-  if (normalizeStatusText === "não começei") {
+  if (normalizeStatusText === "dont-started") {
     return (
-      <div className={`badge-base ${styles.dontStarted}`}>
+      <div className="badge-base dont-started">
         <span>{children}</span>
       </div>
     );
