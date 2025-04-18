@@ -1,5 +1,5 @@
 :root {
   /* border */
-  --border-xs: 0.25rem; /* 4px */
-  --border-infinite: 999rem; /* 999px */
+  --radius-xs: 0.25rem; /* 4px */
+  --radius-infinite: 999rem; /* 999px */
 }
