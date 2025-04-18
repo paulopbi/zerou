@@ -1,16 +1,14 @@
-//react
 import React from "react";
-//css
-import styles from "./CreateAccountPage.module.css";
-//components
+import "./CreateAccountPage.css";
 import InputWithLabel from "../../components/ui/InputWithLabel";
 import Button from "../../components/ui/Button";
-//lib's
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 import { FirebaseError } from "firebase/app";
 import { firebaseErrorHandler } from "../../firebase/firebaseErrorHandler";
+import { passwordTextSize } from "../../constants";
+import Alert from "../../components/ui/error/Alert";
 
 const CreateAccountPage = () => {
   //react router
@@ -21,7 +19,7 @@ const CreateAccountPage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [error, setErro] = React.useState("");
+  const [error, setError] = React.useState("");
 
   //context api hook
   const { register } = useAuth();
@@ -29,8 +27,7 @@ const CreateAccountPage = () => {
   //form submit handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErro("");
-    const passwordSize = 6;
+    setError("");
 
     try {
       const formData = {
@@ -40,43 +37,34 @@ const CreateAccountPage = () => {
         confirmPassword,
       };
 
-      if (formData.password !== formData.confirmPassword) {
-        throw new Error("A senha e a confirmação de senha devem ser iguais");
-      }
-
-      if (formData.password.length < passwordSize) {
-        throw new Error(`A senha precisa ter ${passwordSize} caracteres`);
-      }
-
-      const registerStatus = await register(formData);
-
-      if (!registerStatus) {
-        throw new Error("Algo deu errado, tente novamente mais tarde!");
-      }
-
+      await register(formData);
       navigate("/");
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        setErro(firebaseErrorHandler(error));
-        console.error(error.code);
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        const firebaseErrorMessage = firebaseErrorHandler(err);
+        setError(firebaseErrorMessage);
+        console.error(firebaseErrorMessage);
         return;
       }
-      console.log("Algo deu errado, tente novamente mais tarde!");
+
+      setError("Algo deu errado, tente novamente mais tarde!");
+      console.error(err);
     }
   };
+
   return (
-    <section className={styles.createAccount}>
+    <section className="create-account container">
       <div className="container">
         {/* heading */}
-        <div>
-          <h1 className="title--main text-center">Zerou</h1>
+        <div className="create-account-heading">
+          <h1 className="text-center">Zerou</h1>
           <p className="description text-center">Crie uma conta para começar</p>
         </div>
 
         {/* inputs group */}
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className="create-account__form" onSubmit={handleSubmit}>
           {/* user name */}
-          <div className={styles.formGroup}>
+          <div className="create-account-form-group">
             <InputWithLabel
               id="username"
               type="text"
@@ -89,7 +77,7 @@ const CreateAccountPage = () => {
           </div>
 
           {/* email */}
-          <div className={styles.formGroup}>
+          <div className="create-account-form-group">
             <InputWithLabel
               id="email"
               type="email"
@@ -102,12 +90,13 @@ const CreateAccountPage = () => {
           </div>
 
           {/* password */}
-          <div className={styles.formGroup}>
+          <div className="create-account-form-group">
             <InputWithLabel
               id="password"
               type="password"
               label="Digite a sua senha"
               placeholder="Digite sua senha"
+              minLength={passwordTextSize}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -115,12 +104,13 @@ const CreateAccountPage = () => {
           </div>
 
           {/* confirm password */}
-          <div className={styles.formGroup}>
+          <div className="create-account-form-group">
             <InputWithLabel
               id="confirmPassword"
               type="password"
               label="Confirme sua senha"
               placeholder="Digite novamente sua senha"
+              minLength={passwordTextSize}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -128,10 +118,10 @@ const CreateAccountPage = () => {
           </div>
 
           {/* error handler */}
-          {error && <p className="error">{error}</p>}
+          {error && <Alert message={error} onlyText />}
 
           {/* button */}
-          <div className={styles.formFooter}>
+          <div className="create-account-submit-area">
             <Button title="Botão para criar conta" type="submit">
               Entrar <ArrowRight size={18} />
             </Button>
