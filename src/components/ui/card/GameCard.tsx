@@ -2,6 +2,7 @@ import "./GameCard.css";
 import Button from "../Button";
 import BadgeStatus from "../badge/BadgeStatus";
 import BadgePlatform from "../badge/BadgePlatform";
+import { truncateText } from "../../../util/truncateText";
 
 interface IGame {
   title: string;
@@ -11,10 +12,10 @@ interface IGame {
 }
 
 const GameCard = ({ title, status, imageUrl, platform }: IGame) => {
-  const truncateText =
-    title.length < 20 ? title : title.substring(0, 20).concat("...");
+  const truncateTitle = truncateText(title, 30);
   return (
     <div className="game-card-container">
+      {/* image or card */}
       {imageUrl ? (
         <div className="game-card-container--with-image">
           <img src={imageUrl} alt={title} />
@@ -25,15 +26,18 @@ const GameCard = ({ title, status, imageUrl, platform }: IGame) => {
         </div>
       )}
 
+      {/* title */}
       <div>
-        <h2 className="game-card__title">{truncateText}</h2>
+        <h6 className="game-card__title">{truncateTitle}</h6>
       </div>
 
+      {/* badges */}
       <div className="game-card-info">
         <BadgeStatus status={status}>{status}</BadgeStatus>
         <BadgePlatform platform={platform}>{platform}</BadgePlatform>
       </div>
 
+      {/* button */}
       <div>
         <Button variant="ghost">Ver detalhes</Button>
       </div>
