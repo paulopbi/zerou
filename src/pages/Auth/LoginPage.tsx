@@ -1,12 +1,10 @@
-//react
 import React from "react";
-//css
 import "./LoginPage.css";
-//components
+
 import InputWithLabel from "../../components/ui/InputWithLabel";
 import Button from "../../components/ui/Button";
-//lib's
 import Alert from "../../components/ui/error/Alert";
+
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { FirebaseError } from "firebase/app";
