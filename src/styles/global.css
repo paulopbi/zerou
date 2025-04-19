@@ -30,6 +30,7 @@ button {
 }
 
 input {
+  min-height: 34px;
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-black);
