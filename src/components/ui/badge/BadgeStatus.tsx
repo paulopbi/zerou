@@ -41,7 +41,7 @@ const BadgeStatus = ({ status, children }: IBadgeStatus) => {
     );
   }
 
-  if (normalizeStatusText === "dont-started") {
+  if (normalizeStatusText === "dont started") {
     return (
       <div className="badge-base dont-started">
         <span>{children}</span>
