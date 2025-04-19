@@ -29,10 +29,14 @@
     background-color: var(--color-light-blue);
 
     span {
+      display: inline-block;
+      max-width: 30ch;
+      word-break: break-all;
+      padding: var(--gap-xs);
       font-size: var(--fs-h6);
       font-weight: var(--font-weight-bold);
-      word-break: break-word;
       text-align: center;
+      margin-inline: auto;
       color: var(--color-brand);
     }
   }
@@ -43,6 +47,7 @@
   font-weight: var(--font-weight-bold);
   text-transform: capitalize;
   color: var(--color-black);
+  word-break: break-all;
 }
 
 .game-card-info {
