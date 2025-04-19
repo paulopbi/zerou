@@ -1,19 +1,18 @@
 /* buttons */
 .btn {
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-bold);
+  display: inline-flex;
   width: 100%;
   min-height: 32px;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--gap-sm);
   text-align: center;
-  outline: none;
-  border: none;
+  border: transparent;
   border-radius: var(--radius-xs);
-  font-weight: 600;
-  font-size: var(--text-size-xs);
-  cursor: pointer;
   transition: var(--smooth-transition);
+  cursor: pointer;
 }
 
 .btn:disabled {
@@ -60,7 +59,7 @@
 
 /* links */
 .link {
-  font-size: var(--text-size-xs);
+  font-size: var(--fs-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-gray);
   transition: var(--smooth-transition);
@@ -73,10 +72,9 @@
 /* utility */
 .label {
   display: block;
-  font-size: var(--text-size-sm);
-  font-family: var(--font-geist);
-  font-weight: 300;
-  color: var(--color-gray-opacity);
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray);
 }
 
 .text-center {
@@ -85,13 +83,13 @@
 
 .badge-base {
   text-transform: capitalize;
-  width: fit-content;
+  min-width: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--gap-sm);
-  padding: 4px 8px;
-  font-size: var(--text-size-xs);
+  gap: var(--gap-md);
+  padding: var(--gap-xs) var(--gap-sm);
+  font-size: var(--fs-sm);
   font-weight: var(--font-weight-semi-bold);
-  border-radius: var(--border-infinite);
+  border-radius: var(--radius-infinite);
 }
