@@ -6,7 +6,6 @@ import { useAuth } from "../../../hooks/useAuth";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../../firebase/firebaseConfig";
 import { X } from "lucide-react";
-import { useNavigate } from "react-router";
 import Alert from "../error/Alert";
 import { firebaseErrorHandler } from "../../../firebase/firebaseErrorHandler";
 import { FirebaseError } from "firebase/app";
@@ -24,7 +23,6 @@ const AddGameModal = ({ setIsAddGameModalOpen }: IAddGameModal) => {
   const [error, setError] = React.useState("");
 
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,8 +43,8 @@ const AddGameModal = ({ setIsAddGameModalOpen }: IAddGameModal) => {
         created_at: Timestamp.now(),
       });
 
+      window.location.reload();
       setIsAddGameModalOpen(false);
-      navigate("/");
     } catch (err) {
       if (err instanceof FirebaseError) {
         const errorMessage = firebaseErrorHandler(err);
