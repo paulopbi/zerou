@@ -31,28 +31,34 @@ button {
 
 input {
   font-family: inherit;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
   &:placeholder {
     font-family: inherit;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-gray);
   }
 }
 
 select {
   font-family: inherit;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
   &::placeholder {
     font-family: inherit;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-gray);
   }
 }
 
 textarea {
   font-family: inherit;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
   &::placeholder {
     font-family: inherit;
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-gray);
   }
 }
 
