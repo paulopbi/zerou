@@ -23,7 +23,6 @@
 .btn-primary {
   color: var(--color-background);
   background-color: var(--color-brand);
-
   &:hover {
     opacity: 0.8;
   }
@@ -33,7 +32,6 @@
   color: var(--color-brand);
   border: 1px solid var(--color-brand);
   background-color: transparent;
-
   &:hover {
     opacity: 0.8;
   }
@@ -42,7 +40,6 @@
 .btn-sucess {
   color: var(--color-sucess-dark);
   background-color: var(--color-sucess);
-
   &:hover {
     opacity: 0.8;
   }
@@ -51,7 +48,6 @@
 .btn-danger {
   color: var(--color-danger-dark);
   background-color: var(--color-danger);
-
   &:hover {
     opacity: 0.9;
   }
@@ -63,7 +59,6 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-gray);
   transition: var(--smooth-transition);
-
   &:hover {
     color: var(--color-brand);
   }
@@ -79,6 +74,18 @@
 
 .text-center {
   text-align: center;
+}
+
+.logo {
+  font-size: var(--fs-h6);
+  font-family: var(--font-playfair);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand);
+  cursor: pointer;
+  transition: var(--smooth-transition);
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .badge-base {
