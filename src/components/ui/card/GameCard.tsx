@@ -2,6 +2,7 @@ import "./GameCard.css";
 import Button from "../Button";
 import BadgeStatus from "../badge/BadgeStatus";
 import BadgePlatform from "../badge/BadgePlatform";
+
 import { truncateText } from "../../../util/truncateText";
 
 interface IGame {
@@ -18,7 +19,7 @@ const GameCard = ({ title, status, imageUrl, platform }: IGame) => {
       {/* image or card */}
       {imageUrl ? (
         <div className="game-card-container--with-image">
-          <img src={imageUrl} alt={title} />
+          <img src={imageUrl} alt={title} loading="lazy" />
         </div>
       ) : (
         <div className="game-card-container--without-image">
