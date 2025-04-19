@@ -1,35 +1,29 @@
 .xbox {
   color: var(--color-xbox-bg);
-  border-color: var(--color-xbox-bg);
   background-color: var(--color-xbox);
 }
 
 .playstation {
   color: var(--color-playstation-bg);
-  border-color: var(--color-playstation-bg);
   background-color: var(--color-playstation);
 }
 
 .nintendo {
   color: var(--color-nintendo-bg);
-  border-color: var(--color-nintendo-bg);
   background-color: var(--color-nintendo);
 }
 
 .pc {
   color: var(--color-pc);
-  border-color: var(--color-pc);
   background-color: var(--color-pc-bg);
 }
 
 .mobile {
   color: var(--color-mobile);
-  border-color: var(--color-mobile);
-  color: var(--color-mobile-bg);
+  background-color: var(--color-mobile-bg);
 }
 
 .steam-deck {
   color: var(--color-steam-deck);
-  border-color: var(--color-steam-deck);
   background-color: var(--color-steam-deck-bg);
 }
