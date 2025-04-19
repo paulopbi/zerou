@@ -42,8 +42,8 @@ const BadgePlatform = ({ children, platform }: IBadgePlatform) => {
         <span>{children}</span>
       </div>
     );
-  console.log(normalizePlatformText);
-  if (normalizePlatformText === "steam-deck")
+
+  if (normalizePlatformText === "steam deck")
     return (
       <div className="badge-base steam-deck">
         <span>{children}</span>
