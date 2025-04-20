@@ -1,0 +1,44 @@
+:root {
+  /* design system colors */
+  --color-background: #fcfcfc;
+  --color-brand: #1753a2;
+  --color-white: #fff;
+  --color-black: #1a1a1a;
+  --color-gray: #474747;
+  --color-light-blue: #eaeef7;
+
+  /* alert */
+  --color-danger: #fe8c8c;
+  --color-danger-light: #f5c6cb;
+  --color-danger-dark: #470000;
+  --color-warning: #fff3cd;
+  --color-warning-light: #ffeeba;
+  --color-warning-dark: #856404;
+  --color-sucess: #77ef71;
+  --color-sucess-light: #c3e6cb;
+  --color-sucess-dark: #044c00;
+  --color-info-dark: #0c5460;
+  --color-info-light: #bee5eb;
+  --color-info: #d1ecf1;
+
+  /* games color */
+  --color-xbox: #107c10;
+  --color-xbox-bg: #c6e3c6;
+  --color-playstation: #0052cc;
+  --color-playstation-bg: #c3d5f8;
+  --color-nintendo: #e60012;
+  --color-nintendo-bg: #f9c3c7;
+  --color-pc: #333;
+  --color-pc-bg: #d1d1d1;
+  --color-steam-deck: #2a475e;
+  --color-steam-deck-bg: #c2d0dc;
+  --color-mobile: #ff9500;
+  --color-mobile-bg: #ffe1b8;
+
+  /* badge colors */
+  --color-completed: #155724;
+  --color-playing: #856404;
+  --color-wishlist: #084298;
+  --color-replaying: #383d41;
+  --color-dont-started: #721c24;
+}
