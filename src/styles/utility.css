@@ -1,0 +1,103 @@
+/* buttons */
+.btn {
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-bold);
+  display: inline-flex;
+  width: fit-content;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  padding: var(--gap-sm) var(--gap-md);
+  text-align: center;
+  border: transparent;
+  border-radius: var(--radius-xs);
+  transition: var(--smooth-transition);
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  color: var(--color-background);
+  background-color: var(--color-brand);
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn-ghost {
+  color: var(--color-brand);
+  border: 1px solid var(--color-brand);
+  background-color: transparent;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn-sucess {
+  color: var(--color-sucess-dark);
+  background-color: var(--color-sucess);
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn-danger {
+  color: var(--color-danger-dark);
+  background-color: var(--color-danger);
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* links */
+.link {
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray);
+  transition: var(--smooth-transition);
+  &:hover {
+    color: var(--color-brand);
+  }
+}
+
+/* utility */
+.label {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.logo {
+  font-size: var(--fs-h6);
+  font-family: var(--font-playfair);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand);
+  cursor: pointer;
+  transition: var(--smooth-transition);
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.badge-base {
+  text-transform: capitalize;
+  min-width: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-md);
+  padding: var(--gap-xs) var(--gap-sm);
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-semi-bold);
+  border-radius: var(--radius-infinite);
+}
