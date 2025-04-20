@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import CreateAccountPage from "@/routes/Router";
+import CreateAccountPage from "@/pages/CreateAccountPage";
+import LoginPage from "@/pages/LoginPage";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/create-account" element={<CreateAccountPage />} />
-        {/* outras rotas futuras aqui */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/criar-conta" element={<CreateAccountPage />} />
       </Routes>
     </BrowserRouter>
   );
