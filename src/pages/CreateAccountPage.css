@@ -1,0 +1,41 @@
+.create-account {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+}
+
+.create-account__title {
+  font-weight: bold;
+  margin-bottom: var(--gap-xs);
+  font-family: var(--font-playfair);
+  color: var(--color-brand);
+}
+
+.create-account__subtitle {
+  margin-bottom: var(--gap-xl);
+}
+
+.create-account__form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  margin-bottom: 1rem;
+}
+
+.create-account__input {
+  padding: 0.65rem;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-xs);
+}
+
+.create-account__login-link a {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+}
