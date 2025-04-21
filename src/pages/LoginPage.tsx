@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { FormEvent, useState } from "react";
 import { passwordMinLenght } from "@/contants";
 import { FirebaseError } from "firebase/app";
-import { firebaseErrorHandler } from "@/libs/firebaseErrorHandler";
+import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
