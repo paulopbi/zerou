@@ -30,6 +30,12 @@ button {
   font-family: var(--font-geist);
 }
 
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  user-select: none;
+}
+
 input {
   min-height: 34px;
   font-family: inherit;
