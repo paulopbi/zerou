@@ -1,18 +1,20 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 import "./Button.css";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "standard" | "ghost" | "danger" | "success";
+  variant?: "default" | "ghost" | "danger" | "success";
 }
 
-export default function Button({
-  variant = "standard",
-  children,
-  ...props
-}: ButtonProps) {
-  return (
-    <button className={`button button--${variant}`} {...props}>
-      {children}
-    </button>
-  );
-}
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "default", children, ...props }, ref) => {
+    return (
+      <button className={`button button--${variant}`} ref={ref} {...props}>
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
+
+export default Button;
