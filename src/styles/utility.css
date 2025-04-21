@@ -77,6 +77,10 @@
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .logo {
   font-size: var(--fs-h6);
   font-family: var(--font-playfair);
@@ -100,4 +104,9 @@
   font-size: var(--fs-sm);
   font-weight: var(--font-weight-semi-bold);
   border-radius: var(--radius-infinite);
+}
+
+.error-message {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-danger);
 }
