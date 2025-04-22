@@ -37,13 +37,14 @@ button:disabled {
 }
 
 input {
-  min-height: 34px;
+  min-height: 32px;
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-black);
 }
 
 input::placeholder {
+  font-size: var(--fs-xs);
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-gray);
@@ -56,6 +57,7 @@ select {
 }
 
 select::placeholder {
+  font-size: var(--fs-xs);
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-gray);
@@ -68,6 +70,7 @@ textarea {
 }
 
 textarea::placeholder {
+  font-size: var(--fs-xs);
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-gray);
