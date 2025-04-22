@@ -1,76 +1,25 @@
-/* buttons */
-.btn {
-  font-size: var(--fs-sm);
-  font-weight: var(--font-weight-bold);
-  display: inline-flex;
-  width: fit-content;
-  min-height: 32px;
-  align-items: center;
-  justify-content: center;
-  gap: var(--gap-sm);
-  padding: var(--gap-sm) var(--gap-md);
-  text-align: center;
-  border: transparent;
-  border-radius: var(--radius-xs);
-  transition: var(--smooth-transition);
-  cursor: pointer;
-}
-
-.btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  color: var(--color-background);
-  background-color: var(--color-brand);
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
-.btn-ghost {
-  color: var(--color-brand);
-  border: 1px solid var(--color-brand);
-  background-color: transparent;
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
-.btn-sucess {
-  color: var(--color-sucess-dark);
-  background-color: var(--color-sucess);
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
-.btn-danger {
-  color: var(--color-danger-dark);
-  background-color: var(--color-danger);
-  &:hover {
-    opacity: 0.9;
-  }
-}
-
-/* links */
 .link {
   font-size: var(--fs-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-gray);
   transition: var(--smooth-transition);
-  &:hover {
-    color: var(--color-brand);
-  }
 }
 
-/* utility */
-.label {
-  display: block;
-  font-size: var(--fs-sm);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-gray);
+.link:hover {
+  color: var(--color-brand);
+}
+
+.logo {
+  font-size: var(--fs-h6);
+  font-family: var(--font-playfair);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand);
+  cursor: pointer;
+  transition: var(--smooth-transition);
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 .text-center {
@@ -81,32 +30,98 @@
   text-align: left;
 }
 
-.logo {
-  font-size: var(--fs-h6);
-  font-family: var(--font-playfair);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-brand);
-  cursor: pointer;
-  transition: var(--smooth-transition);
-  &:hover {
-    opacity: 0.8;
-  }
-}
-
-.badge-base {
-  text-transform: capitalize;
-  min-width: 40px;
+/* badges */
+.badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--gap-md);
-  padding: var(--gap-xs) var(--gap-sm);
+  text-align: center;
+  text-transform: capitalize;
   font-size: var(--fs-sm);
   font-weight: var(--font-weight-semi-bold);
+  min-width: 20px;
+  min-height: 20px;
+  gap: var(--gap-md);
+  padding: var(--gap-xs) var(--gap-sm);
   border-radius: var(--radius-infinite);
 }
 
+/* game badges */
+.badge--nintendo {
+  border: 1px solid var(--color-nintendo);
+  color: var(--color-nintendo);
+  background-color: var(--color-nintendo-bg);
+}
+
+.badge--playstation {
+  border: 1px solid var(--color-playstation);
+  color: var(--color-playstation);
+  background-color: var(--color-playstation-bg);
+}
+
+.badge--xbox {
+  border: 1px solid var(--color-xbox);
+  color: var(--color-xbox);
+  background-color: var(--color-xbox-bg);
+}
+
+.badge--pc {
+  border: 1px solid var(--color-pc);
+  color: var(--color-pc);
+  background-color: var(--color-pc-bg);
+}
+
+.badge--mobile {
+  border: 1px solid var(--color-mobile);
+  color: var(--color-mobile);
+  background-color: var(--color-mobile-bg);
+}
+
+.badge--steam-deck {
+  border: 1px solid var(--color-steam-deck);
+  color: var(--color-steam-deck);
+  background-color: var(--color-steam-deck-bg);
+}
+
+/* status badge */
+.badge--dont-started {
+  border: 1px solid var(--color-dont-started);
+  color: var(--color-dont-started);
+}
+
+.badge--completed {
+  border: 1px solid var(--color-completed);
+  color: var(--color-completed);
+}
+
+.badge--wishlist {
+  border: 1px solid var(--color-wishlist);
+  color: var(--color-wishlist);
+}
+
+.badge--replaying {
+  border: 1px solid var(--color-replaying);
+  color: var(--color-replaying);
+}
+
+.badge--playing {
+  border: 1px solid var(--color-playing);
+  color: var(--color-playing);
+}
+
+/* system */
 .error-message {
+  padding: 16px;
   font-weight: var(--font-weight-bold);
   color: var(--color-danger);
+}
+
+.info-message {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-info);
+}
+
+.info-message--dark {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-info-dark);
 }
