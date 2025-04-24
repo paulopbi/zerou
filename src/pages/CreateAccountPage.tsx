@@ -37,6 +37,7 @@ const CreateAccountPage = () => {
         message: "Todos os campos precisam ser preenchidos.",
         variant: "danger",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -48,6 +49,7 @@ const CreateAccountPage = () => {
         message: `A senha precisa ter mais de ${PASSWORD_MIN_LENGTH} caracteres.`,
         variant: "danger",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -56,6 +58,7 @@ const CreateAccountPage = () => {
         message: "As senhas precisam ser iguais!",
         variant: "danger",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -81,8 +84,8 @@ const CreateAccountPage = () => {
 
       setTimeout(() => {
         setSystemMessage({ message: "", variant: null });
-        setIsLoading(false);
         navigate("/login");
+        setIsLoading(false);
       }, TIMEOUT_VALUE);
     } catch (error) {
       if (error instanceof FirebaseError) {
