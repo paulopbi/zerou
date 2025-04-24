@@ -31,6 +31,7 @@ const LoginPage = () => {
         message: "Todos os campos precisam ser preenchidos!",
         variant: "danger",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -39,6 +40,7 @@ const LoginPage = () => {
         message: `A senha precisa ter no mínimo ${PASSWORD_MIN_LENGTH} caracteres`,
         variant: "danger",
       });
+      setIsLoading(false);
       return;
     }
 
