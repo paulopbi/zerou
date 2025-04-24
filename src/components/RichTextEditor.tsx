@@ -163,7 +163,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
         </button>
       </div>
 
-      <EditorContent placeholder="Clique aqui para digitar" editor={editor} />
+      <EditorContent editor={editor} />
     </div>
   );
 };
