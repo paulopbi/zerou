@@ -1,6 +1,5 @@
-import { Link, useNavigate } from "react-router";
-import Button from "@/components/Button";
 import "./CreateAccountPage.css";
+import { Link, useNavigate } from "react-router";
 import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -12,6 +11,9 @@ import { auth } from "@/config/firebase";
 import { passwordMinLenght } from "@/contants";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { FirebaseError } from "firebase/app";
+import { ToastType } from "@/types";
+import Button from "@/components/Button";
+import Toast from "@/components/Toast";
 
 const CreateAccountPage = () => {
   const [displayName, setDisplayName] = useState("");
@@ -19,6 +21,10 @@ const CreateAccountPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [systemMessage, setSystemMessage] = useState<ToastType>({
+    message: "",
+    variant: null,
+  });
 
   const navigate = useNavigate();
   const { loading } = useAuth();
@@ -60,8 +66,19 @@ const CreateAccountPage = () => {
         return;
       }
 
-      window.alert("Usuário criado com sucesso, faça login para continuar!");
-      navigate("/login");
+      setSystemMessage({
+        message: "Usuário criado com sucesso!",
+        variant: "success",
+      });
+      setDisplayName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+
+      setTimeout(() => {
+        setSystemMessage({ message: "", variant: null });
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       if (error instanceof FirebaseError) {
         const firebaseReturnErrorMessage = firebaseErrorHandler(error);
@@ -75,11 +92,12 @@ const CreateAccountPage = () => {
   };
 
   return (
-    <div className="create-account container">
-      <h1 className="create-account__title">zerou</h1>
-      <p className="create-account__subtitle">
-        Crie uma conta para acompanhar seus jogos zerados!
-      </p>
+    <section className="create-account container">
+      <div className="create-account__heading">
+        <h1 className="title--brand">Zerou</h1>
+        <p>Crie uma conta para acompanhar seus jogos zerados!</p>
+      </div>
+
       <form className="create-account__form" onSubmit={handleCreateAccount}>
         <input
           name="displayName"
@@ -113,7 +131,9 @@ const CreateAccountPage = () => {
           placeholder="Repetir senha"
           className="create-account__input"
         />
-        {error && <p className="error-message text-left">{error}</p>}
+
+        {error && <p className="message-error text-left">{error}</p>}
+
         {loading ? (
           <Button type="submit" disabled={loading}>
             Criando usuário...
@@ -122,10 +142,18 @@ const CreateAccountPage = () => {
           <Button type="submit">Criar Conta</Button>
         )}
       </form>
-      <p className="create-account__login-link">
-        Já tem uma conta? <Link to="/login">Fazer login</Link>
+
+      <p>
+        Já tem uma conta?{" "}
+        <Link to="/login" className="create-account__login-link">
+          Fazer login
+        </Link>
       </p>
-    </div>
+
+      {systemMessage.message && systemMessage.variant && (
+        <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
+      )}
+    </section>
   );
 };
 

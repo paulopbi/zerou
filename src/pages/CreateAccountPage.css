@@ -5,37 +5,40 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 2rem;
   text-align: center;
 }
 
+.create-account__heading {
+  margin-bottom: var(--gap-xl);
+  max-width: var(--screen-phone);
+}
+
 .create-account__title {
-  font-weight: bold;
-  margin-bottom: var(--gap-xs);
+  font-weight: var(--font-weight-bold);
   font-family: var(--font-playfair);
   color: var(--color-brand);
 }
 
-.create-account__subtitle {
-  margin-bottom: var(--gap-xl);
-}
-
 .create-account__form {
-  width: 60%;
+  width: 100%;
+  max-width: var(--screen-phone);
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
-  margin-bottom: 1rem;
+  margin-bottom: var(--gap-md);
 }
 
 .create-account__input {
-  padding: 0.65rem;
-  border: 1px solid var(--color-gray);
   border-radius: var(--radius-xs);
 }
 
-.create-account__login-link a {
+.create-account__login-link {
   color: var(--color-brand);
   font-weight: var(--font-weight-bold);
   text-decoration: underline;
+  transition: var(--smooth-transition);
+}
+
+.create-account__login-link:hover {
+  color: var(--color-black);
 }
