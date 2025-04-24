@@ -6,7 +6,7 @@ const WithoutGame = () => {
   return (
     <div className="empty-state">
       <h6 className="empty-state__title">Sua lista de jogos está vazia</h6>
-      <p className="empty-state__message">
+      <p className="message-info--dark">
         Adicione jogos a sua lista no botão abaixo.
       </p>
       <Link
