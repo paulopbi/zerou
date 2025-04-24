@@ -1,9 +1,9 @@
-import { Link, useParams } from "react-router";
 import "./DetailedGames.css";
+import { Link, useParams } from "react-router";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useEffect, useState } from "react";
-import { IDatabaseSchema } from "@/types";
+import { DatabaseSchemaType } from "@/types";
 import { getBadgeModifier } from "@/utils/getBadgeModifier";
 import { ArrowLeft } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
@@ -12,7 +12,7 @@ import Navbar from "@/components/Navbar";
 
 const DetailedGame = () => {
   const { id } = useParams<{ id: string }>();
-  const [gameData, setGameData] = useState<IDatabaseSchema | null>(null);
+  const [gameData, setGameData] = useState<DatabaseSchemaType | null>(null);
   const [editorContent, setEditorContent] = useState(gameData?.description);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState("");
@@ -67,7 +67,7 @@ const DetailedGame = () => {
           return;
         }
 
-        setGameData(gameSnap.data() as IDatabaseSchema);
+        setGameData(gameSnap.data() as DatabaseSchemaType);
       } catch (error) {
         console.error(error);
         setError("Algo deu errado, tente novamente");
