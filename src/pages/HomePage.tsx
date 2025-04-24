@@ -2,9 +2,9 @@ import "./HomePage.css";
 import { PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getFirestoreCollection } from "@/services/getFirestoreCollection";
+import { getFirestoreCollection } from "@/utils/getFirestoreCollection";
 import { useAuth } from "@/contexts/AuthContext";
-import { IDatabaseSchema } from "@/types";
+import { DatabaseSchemaType } from "@/types";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import Navbar from "@/components/Navbar";
@@ -13,7 +13,7 @@ import GameCard from "@/components/GameCard";
 import Loading from "@/components/Loading";
 
 const HomePage = () => {
-  const [database, setDatabase] = useState<null | IDatabaseSchema[]>(null);
+  const [database, setDatabase] = useState<null | DatabaseSchemaType[]>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -44,6 +44,7 @@ const HomePage = () => {
     fetchData();
   }, []);
 
+  console.log(database);
   if (isLoading) {
     return <Loading />;
   }
