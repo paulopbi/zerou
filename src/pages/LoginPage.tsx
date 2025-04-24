@@ -1,60 +1,83 @@
 import "./LoginPage.css";
-import Button from "@/components/Button";
 import { Link, useNavigate } from "react-router";
-import { useAuth } from "@/contexts/AuthContext";
 import { FormEvent, useState } from "react";
-import { passwordMinLenght } from "@/contants";
+import { PASSWORD_MIN_LENGTH, TIMEOUT_VALUE } from "@/contants";
 import { FirebaseError } from "firebase/app";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import { ToastType } from "@/types";
+import Button from "@/components/Button";
+import Toast from "@/components/Toast";
 
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [systemMessage, setSystemMessage] = useState<ToastType>({
+    message: "",
+    variant: null,
+  });
 
   const navigate = useNavigate();
-  const { loading } = useAuth();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
+    setIsLoading(true);
+    setSystemMessage({ message: "", variant: null });
 
     if (!email || !password) {
-      setError("Todos os campos precisam ser preenchidos!");
+      setSystemMessage({
+        message: "Todos os campos precisam ser preenchidos!",
+        variant: "danger",
+      });
+      return;
     }
 
-    if (password.length < passwordMinLenght) {
-      setError(`A senha precisa ter no mínimo ${passwordMinLenght} caracteres`);
+    if (password.length < PASSWORD_MIN_LENGTH) {
+      setSystemMessage({
+        message: `A senha precisa ter no mínimo ${PASSWORD_MIN_LENGTH} caracteres`,
+        variant: "danger",
+      });
+      return;
     }
 
     try {
-      const resp = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
-      if (!resp.user) {
-        setError("Algo deu errado! Tente novamente.");
-        return;
-      }
+      setSystemMessage({
+        message: "Login feito com sucesso!",
+        variant: "success",
+      });
 
-      window.alert("Login feito com sucesso!");
-      navigate("/");
+      setTimeout(() => {
+        setSystemMessage({ message: "", variant: null });
+        setIsLoading(false);
+        navigate("/");
+      }, TIMEOUT_VALUE);
     } catch (error) {
       if (error instanceof FirebaseError) {
         const firebaseErrorResponse = firebaseErrorHandler(error);
-        setError(firebaseErrorResponse);
+        setSystemMessage({ message: firebaseErrorResponse, variant: "danger" });
         console.error(error);
+        setIsLoading(false);
         return;
       }
-
       console.error("Algo deu errado: " + error);
-      setError("Algo deu errado tente novamente mais tarde!");
+      setSystemMessage({
+        message: "Algo deu errado tente novamente mais tarde!",
+        variant: "danger",
+      });
+      setIsLoading(false);
     }
   };
   return (
-    <div className="login container">
-      <h1 className="login__title">zerou</h1>
-      <p className="login__subtitle">Faça login para continuar!</p>
+    <section className="login container">
+      <div className="login__heading">
+        <h1 className="title--brand">zerou</h1>
+        <p>Faça login para continuar!</p>
+      </div>
+
       <form className="login__form" onSubmit={handleLogin}>
         <input
           value={email}
@@ -72,19 +95,23 @@ const LoginPage = () => {
           className="login__input"
           required
         />
-        {error && <p className="error-message text-left">{error}</p>}
-        {loading ? (
-          <Button type="submit" disabled>
-            Carregando...
-          </Button>
-        ) : (
-          <Button type="submit">Entrar</Button>
-        )}
+
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Entrar"}
+        </Button>
       </form>
-      <p className="login__login-link">
-        Não possui conta? <Link to="/criar-conta">Criar Conta</Link>
+
+      <p>
+        Não possui conta?{" "}
+        <Link to="/criar-conta" className="login__create-account">
+          Criar Conta
+        </Link>
       </p>
-    </div>
+
+      {systemMessage.message && systemMessage.variant && (
+        <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
+      )}
+    </section>
   );
 };
 

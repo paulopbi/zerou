@@ -5,23 +5,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 2rem;
   text-align: center;
 }
 
-.login__title {
-  font-weight: bold;
-  margin-bottom: var(--gap-xs);
-  font-family: var(--font-playfair);
-  color: var(--color-brand);
-}
-
-.login__subtitle {
+.login__heading {
   margin-bottom: var(--gap-xl);
 }
 
 .login__form {
-  width: 60%;
+  width: 100%;
+  max-width: var(--screen-phone);
   display: flex;
   flex-direction: column;
   gap: var(--gap-md);
@@ -29,13 +22,16 @@
 }
 
 .login__input {
-  padding: 0.65rem;
-  border: 1px solid var(--color-gray);
   border-radius: var(--radius-xs);
 }
 
-.login__login-link a {
+.login__create-account {
   color: var(--color-brand);
   font-weight: var(--font-weight-bold);
   text-decoration: underline;
+  transition: var(--smooth-transition);
+}
+
+.login__create-account:hover {
+  color: var(--color-black);
 }
