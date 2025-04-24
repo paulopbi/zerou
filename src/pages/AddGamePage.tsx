@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";
 import { Link, useNavigate } from "react-router";
 import { FormEvent, useState } from "react";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import RichTextEditor from "@/components/RichTextEditor";
@@ -31,7 +31,11 @@ const AddGamePage = () => {
     }
 
     try {
+      const gameCollectionRef = collection(db, "games");
+      const newDocRef = doc(gameCollectionRef);
+
       const databaseSchema = {
+        id: newDocRef.id,
         user_id: user.uid,
         title: title,
         image_source: imageSource,
@@ -41,14 +45,7 @@ const AddGamePage = () => {
         created_at: Timestamp.now(),
       };
 
-      const gameCollectionRef = collection(db, "games");
-      const databaseResp = await addDoc(gameCollectionRef, databaseSchema);
-
-      if (!databaseResp) {
-        setError(
-          "Algo deu errado ao criar o jogo, por favor, tente novamente!"
-        );
-      }
+      await setDoc(newDocRef, databaseSchema);
 
       window.alert("Jogo adicionado com sucesso!");
       Navigate("/");
