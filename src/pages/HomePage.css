@@ -1,0 +1,40 @@
+.home {
+  margin-block: var(--gap-xxl);
+}
+
+.home__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  margin-inline: auto;
+  width: 100%;
+}
+
+.home__title {
+  color: var(--color-gray);
+}
+
+.home__input {
+  width: 100%;
+  max-width: 532px;
+  padding-left: 8px;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-xs);
+}
+
+.home__button {
+  width: 100%;
+  max-width: 532px;
+  height: 42px;
+  margin-top: var(--gap-xs);
+}
+
+.home__cards {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 310px);
+  gap: var(--gap-big) var(--gap-xl);
+  margin-block: var(--gap-xxl);
+}
