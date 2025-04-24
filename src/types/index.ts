@@ -1,4 +1,5 @@
 export interface IDatabaseSchema {
+  id: string;
   title: string;
   image_source: string;
   platform:
@@ -8,6 +9,6 @@ export interface IDatabaseSchema {
     | "nintendo"
     | "mobile"
     | "steam deck";
-  status: "playing" | "wishlist" | "replaying" | "dont started";
-  content: string;
+  status: "playing" | "wishlist" | "replaying" | "dont started" | "completed";
+  description: string;
 }
