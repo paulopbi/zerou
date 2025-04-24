@@ -43,11 +43,11 @@
 }
 
 .button--success {
-  color: var(--color-sucess-dark);
-  background-color: var(--color-sucess);
+  color: var(--color-success-dark);
+  background-color: var(--color-success);
 }
 
 .button--success:hover {
-  color: var(--color-sucess);
-  background-color: var(--color-sucess-dark);
+  color: var(--color-success);
+  background-color: var(--color-success-dark);
 }
