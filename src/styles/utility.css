@@ -109,19 +109,18 @@
   color: var(--color-playing);
 }
 
-/* system */
-.error-message {
-  padding: 16px;
-  font-weight: var(--font-weight-bold);
+/* system messages */
+.message-error {
+  font-weight: var(--font-weight-medium);
   color: var(--color-danger);
 }
 
-.info-message {
-  font-weight: var(--font-weight-bold);
+.message-info {
+  font-weight: var(--font-weight-medium);
   color: var(--color-info);
 }
 
-.info-message--dark {
-  font-weight: var(--font-weight-bold);
+.message-info--dark {
+  font-weight: var(--font-weight-medium);
   color: var(--color-info-dark);
 }
