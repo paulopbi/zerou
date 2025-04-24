@@ -30,6 +30,12 @@
   text-align: left;
 }
 
+/* title */
+.title--brand {
+  font-family: var(--font-playfair);
+  color: var(--color-brand);
+}
+
 /* badges */
 .badge {
   display: inline-flex;
@@ -113,6 +119,11 @@
 .message-error {
   font-weight: var(--font-weight-medium);
   color: var(--color-danger);
+}
+
+.message-error--dark {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-danger-dark);
 }
 
 .message-info {
