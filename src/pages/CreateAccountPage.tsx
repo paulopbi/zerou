@@ -3,7 +3,11 @@ import Button from "@/components/Button";
 import "./CreateAccountPage.css";
 import { FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { passwordMinLenght } from "@/contants";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
@@ -42,9 +46,16 @@ const CreateAccountPage = () => {
     }
 
     try {
-      const resp = await createUserWithEmailAndPassword(auth, email, password);
+      const newUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      if (!resp.user) {
+      await sendEmailVerification(newUser.user);
+      await updateProfile(newUser.user, { displayName });
+
+      if (!newUser.user) {
         setError("Algo deu errado! Tente novamente.");
         return;
       }
