@@ -1,7 +1,10 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface IDatabaseSchema {
-  id: string;
+  user_id: string;
   title: string;
   image_source: string;
+  status: "playing" | "wishlist" | "replaying" | "dont started" | "completed";
   platform:
     | "xbox"
     | "pc"
@@ -9,6 +12,6 @@ export interface IDatabaseSchema {
     | "nintendo"
     | "mobile"
     | "steam deck";
-  status: "playing" | "wishlist" | "replaying" | "dont started" | "completed";
   description: string;
+  created_at: Timestamp;
 }
