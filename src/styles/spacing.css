@@ -1,4 +1,9 @@
 :root {
+  /* responsive screen size */
+  --screen-desktop: 1000px;
+  --screen-tablet: 768px;
+  --screen-phone: 600px;
+
   /* gap */
   --gap-xs: 0.25rem; /* 4px */
   --gap-sm: 0.5rem; /* 8px */
