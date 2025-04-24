@@ -114,6 +114,11 @@ p {
   color: var(--color-gray);
 }
 
+blockquote {
+  font-family: var(--font-playfair);
+  padding-left: var(--gap-md);
+}
+
 .container {
   width: 100%;
   max-width: 1000px;
