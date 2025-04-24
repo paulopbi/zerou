@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 
-export interface IDatabaseSchema {
+export type DatabaseSchemaType = {
+  id: string;
   user_id: string;
   title: string;
   image_source: string;
@@ -14,4 +15,9 @@ export interface IDatabaseSchema {
     | "steam deck";
   description: string;
   created_at: Timestamp;
-}
+};
+
+export type ToastType = {
+  message: string;
+  variant: "success" | "danger" | "info" | "warning" | null;
+};
