@@ -1,12 +1,15 @@
 import "./AddGamePage.css";
-import Navbar from "@/components/Navbar";
-import Button from "@/components/Button";
 import { Link, useNavigate } from "react-router";
 import { FormEvent, useState } from "react";
 import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useAuth } from "@/contexts/AuthContext";
+import { ToastType } from "@/types";
+import { TIMEOUT_VALUE } from "@/contants";
+import Navbar from "@/components/Navbar";
+import Button from "@/components/Button";
 import RichTextEditor from "@/components/RichTextEditor";
+import Toast from "@/components/Toast";
 
 const AddGamePage = () => {
   const [title, setTitle] = useState("");
@@ -14,19 +17,47 @@ const AddGamePage = () => {
   const [platform, setPlatform] = useState("");
   const [status, setStatus] = useState("");
   const [editorContent, setEditorContent] = useState("");
-  const [error, setError] = useState("");
+  const [systemMessage, setSystemMessage] = useState<ToastType>({
+    message: "",
+    variant: null,
+  });
 
   const { user } = useAuth();
   const Navigate = useNavigate();
 
   const createGame = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-    if (!platform || !status) {
-      setError("Selecione a plataforma e status");
+    setSystemMessage({ message: "", variant: null });
+
+    if (!title) {
+      setSystemMessage({
+        message: "O titulo é obrigatório",
+        variant: "danger",
+      });
+      return;
+    }
+
+    if (platform.length === 0) {
+      setSystemMessage({
+        message: "Selecione a plataforma.",
+        variant: "danger",
+      });
+      return;
+    }
+
+    if (status.length === 0) {
+      setSystemMessage({
+        message: "Selecione o status.",
+        variant: "danger",
+      });
+      return;
     }
 
     if (!user) {
+      setSystemMessage({
+        message: "Algo deu errado com seu login, tente novamente.",
+        variant: "danger",
+      });
       return;
     }
 
@@ -46,12 +77,26 @@ const AddGamePage = () => {
       };
 
       await setDoc(newDocRef, databaseSchema);
+      setSystemMessage({
+        message: "Jogo adicionado com sucesso!",
+        variant: "success",
+      });
 
-      window.alert("Jogo adicionado com sucesso!");
-      Navigate("/");
+      setTimeout(() => {
+        setSystemMessage({ message: "", variant: null });
+        Navigate("/");
+      }, TIMEOUT_VALUE);
+      setTitle("");
+      setImageSource("");
+      setPlatform("");
+      setStatus("");
+      setEditorContent("");
     } catch (error) {
-      console.error(error);
-      setError("Algo deu errado, tente novamente mais tarde.");
+      setSystemMessage({
+        message: "Algo deu errado, tente novamente mais tarde.",
+        variant: "danger",
+      });
+      console.error("erro: " + error);
     }
   };
 
@@ -110,7 +155,6 @@ const AddGamePage = () => {
             content={editorContent}
             onChange={handleEditorChange}
           />
-          {error && <p className="error-message">{error}</p>}
 
           <div className="add-game__form-buttons">
             <Button type="submit" variant="success">
@@ -121,6 +165,10 @@ const AddGamePage = () => {
             </Link>
           </div>
         </form>
+
+        {systemMessage.message && systemMessage.variant && (
+          <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
+        )}
       </section>
     </>
   );
