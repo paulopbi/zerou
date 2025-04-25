@@ -19,10 +19,10 @@ const LoginPage = () => {
     variant: null,
   });
 
-  const inputRef = useRef<null | HTMLInputElement>(null);
+  const loginInputRef = useRef<null | HTMLInputElement>(null);
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+    if (loginInputRef.current) {
+      loginInputRef.current.focus();
     }
     return () => {};
   }, []);
@@ -98,7 +98,7 @@ const LoginPage = () => {
               Email
             </label>
             <input
-              ref={inputRef}
+              ref={loginInputRef}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               id="email"
