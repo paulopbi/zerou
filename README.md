@@ -15,9 +15,9 @@ Encontrou um bug ou tem uma sugestão? Sinta-se à vontade para:
 - Abrir uma **issue** explicando o problema/melhoria
 - Enviar um **pull request** (se for contribuir **diretamente** com código)
 
-## ©️Licensa
+## ©️Licença
 
-Esse projeto utiliza a licensa do MIT, [veja mais em aqui](./LICENSE).
+Esse projeto utiliza a licença do MIT, [veja mais em aqui](./LICENSE).
 
 ## 📬 Contato
 
