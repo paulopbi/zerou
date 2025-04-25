@@ -11,7 +11,7 @@
 
 .logo {
   font-size: var(--fs-h6);
-  font-family: var(--font-playfair);
+  font-family: var(--font-serif);
   font-weight: var(--font-weight-medium);
   color: var(--color-brand);
   cursor: pointer;
@@ -31,8 +31,12 @@
 }
 
 /* title */
+.title {
+  font-family: var(--font-serif);
+}
+
 .title--brand {
-  font-family: var(--font-playfair);
+  font-family: var(--font-serif);
   color: var(--color-brand);
 }
 
