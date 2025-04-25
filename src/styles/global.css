@@ -78,10 +78,6 @@ textarea::placeholder {
   color: var(--color-gray);
 }
 
-li {
-  list-style: none;
-}
-
 img {
   display: block;
   max-width: 100%;
