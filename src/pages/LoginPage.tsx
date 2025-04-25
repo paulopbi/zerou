@@ -1,6 +1,6 @@
 import "./LoginPage.css";
 import { Link, useNavigate } from "react-router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { PASSWORD_MIN_LENGTH, TIMEOUT_VALUE } from "@/contants";
 import { FirebaseError } from "firebase/app";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
@@ -19,8 +19,15 @@ const LoginPage = () => {
     variant: null,
   });
 
-  const navigate = useNavigate();
+  const inputRef = useRef<null | HTMLInputElement>(null);
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+    return () => {};
+  }, []);
 
+  const navigate = useNavigate();
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -75,37 +82,57 @@ const LoginPage = () => {
   };
   return (
     <section className="login container">
-      <div className="login__heading">
-        <h1 className="title--brand">zerou</h1>
-        <p>Faça login para continuar!</p>
-      </div>
+      <h1 className="title--brand">zerou</h1>
 
-      <form className="login__form" onSubmit={handleLogin}>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Email"
-          className="login__input"
-          required
-        />
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="Senha"
-          className="login__input"
-          required
-        />
+      <main className="login__main-group">
+        <div className="login__main-heading">
+          <h4 className="title">Seja bem-vindo!</h4>
+          <p className="text-center">
+            Digite seu email e senha para acessar sua conta.
+          </p>
+        </div>
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Carregando..." : "Entrar"}
-        </Button>
-      </form>
+        <form className="login__form" onSubmit={handleLogin}>
+          <div className="login__input-group">
+            <label htmlFor="email" className="login__label">
+              Email
+            </label>
+            <input
+              ref={inputRef}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              placeholder="Digite seu melhor email"
+              className="login__input"
+              required
+            />
+          </div>
+
+          <div className="login__input-group">
+            <label htmlFor="password" className="login__label">
+              Digite a sua senha
+            </label>
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              type="password"
+              placeholder="Digite sua senha secreta"
+              className="login__input"
+              required
+            />
+          </div>
+
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Carregando..." : "Entrar"}
+          </Button>
+        </form>
+      </main>
 
       <p>
-        Não possui conta?{" "}
-        <Link to="/criar-conta" className="login__create-account">
+        Ainda não possui conta?{" "}
+        <Link to="/criar-conta" className="login__create-link">
           Criar Conta
         </Link>
       </p>
