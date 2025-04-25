@@ -1,12 +1,12 @@
-/* import playfair */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+/* import prata */
+@import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
 /* import geist */
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 
 :root {
   /* font family */
-  --font-geist: "Geist", sans-serif;
-  --font-playfair: "Playfair Display", sans-serif;
+  --font-serif: "Prata", serif;
+  --font-sans-serif: "Geist", sans-serif;
 
   /* font size */
   --fs-h1: 2.986rem;
