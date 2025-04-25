@@ -3,16 +3,57 @@
   min-height: 100dvh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   text-align: center;
+  gap: var(--gap-md);
+}
+
+.create-account__main {
+  width: 100%;
+  max-width: var(--screen-phone);
+  margin-block: var(--gap-xxl);
 }
 
 .create-account__heading {
-  margin-bottom: var(--gap-xl);
-  max-width: var(--screen-phone);
+  margin-bottom: var(--gap-xxl);
 }
 
+.create-account__subtitle {
+  font-family: var(--font-serif);
+  margin-bottom: var(--gap-xs);
+}
+
+.create-account__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.create-account__form-group {
+  margin-bottom: var(--gap-xs);
+}
+
+.create-account__label {
+  display: block;
+  text-align: left;
+  margin-bottom: var(--gap-xs);
+}
+
+.create-account__input {
+  width: 100%;
+  padding-left: var(--gap-base);
+  border-radius: var(--radius-xs);
+}
+
+.create-account__login-link {
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+  color: var(--color-brand);
+}
+
+/* 
 .create-account__title {
   font-weight: var(--font-weight-bold);
   font-family: var(--font-playfair);
@@ -42,3 +83,4 @@
 .create-account__login-link:hover {
   color: var(--color-black);
 }
+ */

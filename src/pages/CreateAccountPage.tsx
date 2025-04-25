@@ -1,6 +1,6 @@
 import "./CreateAccountPage.css";
 import { Link, useNavigate } from "react-router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -25,8 +25,15 @@ const CreateAccountPage = () => {
     variant: null,
   });
 
-  const navigate = useNavigate();
+  const userInputRef = useRef<null | HTMLInputElement>(null);
+  useEffect(() => {
+    if (userInputRef.current) {
+      userInputRef.current.focus();
+    }
+    return () => {};
+  }, []);
 
+  const navigate = useNavigate();
   const handleCreateAccount = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -109,52 +116,86 @@ const CreateAccountPage = () => {
 
   return (
     <section className="create-account container">
-      <div className="create-account__heading">
-        <h1 className="title--brand">Zerou</h1>
-        <p>Crie uma conta para acompanhar seus jogos zerados!</p>
-      </div>
+      <h1 className="title--brand">Zerou</h1>
 
-      <form className="create-account__form" onSubmit={handleCreateAccount}>
-        <input
-          name="displayName"
-          value={displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-          type="text"
-          placeholder="Nome de usuário"
-          className="create-account__input"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="Email"
-          className="create-account__input"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="Senha"
-          className="create-account__input"
-        />
-        <input
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          type="password"
-          placeholder="Repetir senha"
-          className="create-account__input"
-        />
+      <main className="create-account__main">
+        <div className="create-account__heading">
+          <h4 className="title">Seja bem vindo</h4>
+          <p className="text-center">
+            Crie uma conta para acompanhar seus jogos zerados!
+          </p>
+        </div>
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Criando Conta..." : "Criar Conta"}
-        </Button>
-      </form>
+        <form className="create-account__form" onSubmit={handleCreateAccount}>
+          <div className="create-account__form-group">
+            <label htmlFor="user" className="create-account__label">
+              Digite um nome de usuário
+            </label>
+            <input
+              ref={userInputRef}
+              id="user"
+              name="displayName"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              type="text"
+              placeholder="Nome de usuário"
+              className="create-account__input"
+            />
+          </div>
+
+          <div className="create-account__form-group">
+            <label htmlFor="email" className="create-account__label">
+              Digite um email
+            </label>
+            <input
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+              className="create-account__input"
+            />
+          </div>
+
+          <div className="create-account__form-group">
+            <label htmlFor="password" className="create-account__label">
+              Digite a uma senha
+            </label>
+            <input
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Senha"
+              className="create-account__input"
+            />
+          </div>
+
+          <div className="create-account__form-group">
+            <label htmlFor="confirm-password" className="create-account__label">
+              Confirme a senha
+            </label>
+            <input
+              id="confirm-password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              type="password"
+              placeholder="Repetir senha"
+              className="create-account__input"
+            />
+          </div>
+
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Criando Conta..." : "Criar Conta"}
+          </Button>
+        </form>
+      </main>
 
       <p>
-        Já tem uma conta?{" "}
+        Já possui uma conta?{" "}
         <Link to="/login" className="create-account__login-link">
           Fazer login
         </Link>

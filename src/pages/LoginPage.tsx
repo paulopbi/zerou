@@ -82,10 +82,10 @@ const LoginPage = () => {
   };
   return (
     <section className="login container">
-      <h1 className="title--brand">zerou</h1>
+      <h1 className="title--brand">Zerou</h1>
 
-      <main className="login__main-group">
-        <div className="login__main-heading">
+      <main className="login__main">
+        <div className="login__heading">
           <h4 className="title">Seja bem-vindo!</h4>
           <p className="text-center">
             Digite seu email e senha para acessar sua conta.
@@ -93,9 +93,9 @@ const LoginPage = () => {
         </div>
 
         <form className="login__form" onSubmit={handleLogin}>
-          <div className="login__input-group">
+          <div className="login__form-group">
             <label htmlFor="email" className="login__label">
-              Email
+              Digite seu email
             </label>
             <input
               ref={loginInputRef}
@@ -109,7 +109,7 @@ const LoginPage = () => {
             />
           </div>
 
-          <div className="login__input-group">
+          <div className="login__form-group">
             <label htmlFor="password" className="login__label">
               Digite a sua senha
             </label>
