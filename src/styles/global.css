@@ -4,6 +4,7 @@
 @import url("./border.css");
 @import url("./spacing.css");
 @import url("./utility.css");
+@import url("./shadow.css");
 
 :root {
   --smooth-transition: all 0.4s ease;
@@ -27,7 +28,10 @@ a {
 }
 
 button {
+  outline: none;
+  border: none;
   font-family: var(--font-geist);
+  transition: var(--smooth-transition);
 }
 
 button:disabled {
@@ -55,9 +59,9 @@ input::placeholder {
 
 input:focus {
   border-color: var(--color-brand);
-  -webkit-box-shadow: 0px 0px 8px 2px var(--color-light-shadow);
-  -moz-box-shadow: 0px 0px 8px 2px var(--color-light-shadow);
-  box-shadow: 0px 0px 8px 2px var(--color-light-shadow);
+  -webkit-box-shadow: var(--shadow-input);
+  -moz-box-shadow: var(--shadow-input);
+  box-shadow: var(--shadow-input);
 }
 
 select {
