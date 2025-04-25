@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  font-family: var(--font-geist);
+  font-family: var(--font-sans-serif);
   color: var(--color-black);
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
@@ -40,8 +40,9 @@ input {
   min-height: 32px;
   font-family: inherit;
   font-weight: var(--font-weight-regular);
+  outline: none;
   padding: var(--gap-sm);
-  border: 1px solid var(--color-gray);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   color: var(--color-black);
 }
 
@@ -50,6 +51,13 @@ input::placeholder {
   font-size: var(--fs-xs);
   font-weight: var(--font-weight-regular);
   color: var(--color-gray);
+}
+
+input:focus {
+  border-color: var(--color-brand);
+  -webkit-box-shadow: 0px 0px 8px 2px var(--color-light-shadow);
+  -moz-box-shadow: 0px 0px 8px 2px var(--color-light-shadow);
+  box-shadow: 0px 0px 8px 2px var(--color-light-shadow);
 }
 
 select {
@@ -76,6 +84,11 @@ textarea::placeholder {
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-gray);
+}
+
+label {
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 img {
@@ -113,7 +126,7 @@ p {
 }
 
 blockquote {
-  font-family: var(--font-playfair);
+  font-family: var(--font-serif);
   padding-left: var(--gap-md);
 }
 
