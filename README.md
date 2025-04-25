@@ -6,14 +6,14 @@ Este projeto está em fase de desenvolvimento ativo. Estou trabalhando para impl
 
 ## 📌 Sobre o Projeto
 
-É um tracker de jogos, onde você poderar criar uma conta, colocar os jogos que está jogando e adicionar anotações para controlar melhor sua jogatina
+É um tracker de jogos, onde você pode criar uma conta, colocar os jogos que está jogando e adicionar anotações para controlar melhor sua jogatina.
 
 ## 🤝 Como Contribuir
 
 Encontrou um bug ou tem uma sugestão? Sinta-se à vontade para:
 
 - Abrir uma **issue** explicando o problema/melhoria
-- Enviar um **pull request** (se for contribuir diretamente com código)
+- Enviar um **pull request** (se for contribuir **diretamente** com código)
 
 ## ©️Licensa
 
