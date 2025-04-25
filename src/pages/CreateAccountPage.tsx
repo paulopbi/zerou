@@ -138,7 +138,7 @@ const CreateAccountPage = () => {
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               type="text"
-              placeholder="Nome de usuário"
+              placeholder="Digite sua identidade secreta"
               className="create-account__input"
             />
           </div>
@@ -153,7 +153,7 @@ const CreateAccountPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              placeholder="Email"
+              placeholder="Digite o seu melhor email"
               className="create-account__input"
             />
           </div>
@@ -168,7 +168,7 @@ const CreateAccountPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
-              placeholder="Senha"
+              placeholder="Digite o seu código secreto"
               className="create-account__input"
             />
           </div>
@@ -183,7 +183,7 @@ const CreateAccountPage = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               type="password"
-              placeholder="Repetir senha"
+              placeholder="Repita o seu código secreto"
               className="create-account__input"
             />
           </div>
