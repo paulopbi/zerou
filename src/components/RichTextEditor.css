@@ -1,6 +1,15 @@
 .rich-text-editor {
   padding: var(--gap-md);
   border-radius: var(--radius-xs);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.tiptap {
+  padding: var(--gap-xs);
+}
+
+.tiptap li {
+  margin-left: var(--gap-xl);
 }
 
 .editor-toolbar {
