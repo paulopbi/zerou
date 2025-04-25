@@ -1,0 +1,10 @@
+:root {
+  /* buttons */
+  --shadow-btn-default: 0px 0px 10px 2px #5a89df;
+  --shadow-btn-sucess: 0px 0px 10px 2px #8fff89;
+  --shadow-btn-danger: 0px 0px 10px 2px #ff7e7e;
+  --shadow-btn-ghost: 0px 0px 10px 2px #c5c5c5;
+
+  /* input */
+  --shadow-input: 0px 0px 8px 2px #c0d0e1;
+}
