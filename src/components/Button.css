@@ -1,29 +1,38 @@
 .button {
+  outline: none;
+  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--gap-md) var(--gap-sm);
+  padding: var(--gap-sm) var(--gap-xs);
   font-size: var(--fs-base);
   font-weight: var(--font-weight-bold);
   border-radius: var(--radius-xs);
   gap: var(--gap-xs);
-  cursor: pointer;
-  border: none;
   transition: var(--smooth-transition);
+  cursor: pointer;
 }
 
 .button:hover {
   opacity: 0.9;
 }
 
+/* default */
 .button--default {
   color: var(--color-background);
   background-color: var(--color-brand);
 }
 
+.button--default:focus {
+  -webkit-box-shadow: var(--shadow-btn-default);
+  -moz-box-shadow: var(--shadow-btn-default);
+  box-shadow: var(--shadow-btn-default);
+}
+
+/* ghost */
 .button--ghost {
   color: var(--color-brand);
-  border: 1px solid var(--color-brand);
+  border: 2px solid var(--color-brand);
   background-color: transparent;
 }
 
@@ -32,6 +41,13 @@
   background-color: var(--color-brand);
 }
 
+.button--ghost:focus {
+  -webkit-box-shadow: var(--shadow-btn-ghost);
+  -moz-box-shadow: var(--shadow-btn-ghost);
+  box-shadow: var(--shadow-btn-ghost);
+}
+
+/* danger */
 .button--danger {
   color: var(--color-danger-dark);
   background-color: var(--color-danger);
@@ -42,6 +58,13 @@
   background-color: var(--color-danger-dark);
 }
 
+.button--danger:focus {
+  -webkit-box-shadow: var(--shadow-btn-danger);
+  -moz-box-shadow: var(--shadow-btn-danger);
+  box-shadow: var(--shadow-btn-danger);
+}
+
+/* sucess */
 .button--success {
   color: var(--color-success-dark);
   background-color: var(--color-success);
@@ -50,4 +73,10 @@
 .button--success:hover {
   color: var(--color-success);
   background-color: var(--color-success-dark);
+}
+
+.button--success:focus {
+  -webkit-box-shadow: var(--shadow-btn-sucess);
+  -moz-box-shadow: var(--shadow-btn-sucess);
+  box-shadow: var(--shadow-btn-sucess);
 }
