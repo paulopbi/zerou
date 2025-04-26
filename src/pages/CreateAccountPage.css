@@ -53,34 +53,7 @@
   color: var(--color-brand);
 }
 
-/* 
-.create-account__title {
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-playfair);
-  color: var(--color-brand);
+.detailed__description-container .tiptap {
+  overflow-y: initial;
+  min-height: fit-content;
 }
-
-.create-account__form {
-  width: 100%;
-  max-width: var(--screen-phone);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-md);
-  margin-bottom: var(--gap-md);
-}
-
-.create-account__input {
-  border-radius: var(--radius-xs);
-}
-
-.create-account__login-link {
-  color: var(--color-brand);
-  font-weight: var(--font-weight-bold);
-  text-decoration: underline;
-  transition: var(--smooth-transition);
-}
-
-.create-account__login-link:hover {
-  color: var(--color-black);
-}
- */
