@@ -1,5 +1,8 @@
 :root {
-  /* border */
+  /* radius */
   --radius-xs: 0.25rem; /* 4px */
   --radius-infinite: 999rem; /* 999px */
+
+  /* border */
+  --border-input: 2px solid rgba(0, 0, 0, 0.1);
 }
