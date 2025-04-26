@@ -12,9 +12,8 @@ const Navbar = () => {
           Zerou
         </Link>
       </div>
-
       <nav>
-        <ul className="navbar-links__list">
+        <ul className="navbar__links-list">
           <li>
             <Link to="/" className="link">
               Inicio
@@ -27,8 +26,8 @@ const Navbar = () => {
           </li>
           <li>
             <button
-              title="Ao clicar, irá deslogar o usuário"
-              className="navba-list__logout"
+              title="Ao clicar, irá sair da sua conta o usuário"
+              className="navbar__logout"
               onClick={() => signOut(auth)}
             >
               <LogOut height={24} width={24} />
