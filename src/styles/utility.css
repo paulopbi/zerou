@@ -7,15 +7,16 @@
 
 .link:hover {
   color: var(--color-brand);
+  text-decoration: underline;
 }
 
 .logo {
   font-size: var(--fs-h6);
   font-family: var(--font-serif);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   color: var(--color-brand);
-  cursor: pointer;
   transition: var(--smooth-transition);
+  cursor: pointer;
 }
 
 .logo:hover {
@@ -120,22 +121,18 @@
 }
 
 /* system messages */
-.message-error {
-  font-weight: var(--font-weight-medium);
+.color-error {
   color: var(--color-danger);
 }
 
-.message-error--dark {
-  font-weight: var(--font-weight-medium);
+.color-error--dark {
   color: var(--color-danger-dark);
 }
 
-.message-info {
-  font-weight: var(--font-weight-medium);
+.color-info {
   color: var(--color-info);
 }
 
-.message-info--dark {
-  font-weight: var(--font-weight-medium);
+.color-info--dark {
   color: var(--color-info-dark);
 }
