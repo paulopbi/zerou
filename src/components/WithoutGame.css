@@ -8,10 +8,6 @@
   height: 100dvh;
 }
 
-.empty-state__title {
-  text-transform: capitalize;
-}
-
 .empty-state__button {
   width: 100%;
   max-width: 300px;
