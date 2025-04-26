@@ -42,6 +42,8 @@ const HomePage = () => {
     };
 
     fetchData();
+
+    return () => {};
   }, []);
 
   console.log(database);
