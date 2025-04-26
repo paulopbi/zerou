@@ -48,6 +48,7 @@ input {
   padding: var(--gap-sm);
   border: 2px solid rgba(0, 0, 0, 0.1);
   color: var(--color-black);
+  transition: var(--smooth-transition);
 }
 
 input::placeholder {
@@ -65,9 +66,11 @@ input:focus {
 }
 
 select {
+  outline: none;
   font-family: inherit;
   font-weight: var(--font-weight-regular);
-  color: var(--color-black);
+  min-height: 30px;
+  transition: var(--smooth-transition);
 }
 
 select::placeholder {
@@ -75,6 +78,13 @@ select::placeholder {
   font-family: inherit;
   font-weight: var(--font-weight-regular);
   color: var(--color-gray);
+}
+
+select:focus {
+  border-color: var(--color-brand);
+  -webkit-box-shadow: var(--shadow-input);
+  -moz-box-shadow: var(--shadow-input);
+  box-shadow: var(--shadow-input);
 }
 
 textarea {
@@ -91,6 +101,7 @@ textarea::placeholder {
 }
 
 label {
+  display: block;
   font-size: var(--fs-sm);
   font-weight: var(--font-weight-medium);
 }
