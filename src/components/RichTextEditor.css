@@ -1,11 +1,16 @@
 .rich-text-editor {
-  padding: var(--gap-md);
+  padding: var(--gap-sm);
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: var(--border-input);
 }
 
 .tiptap {
-  padding: var(--gap-xs);
+  padding-inline: 2px;
+  outline-color: var(--color-brand);
+  overflow-y: auto;
+  font-family: inherit;
+  height: 100%;
+  max-height: 220px;
 }
 
 .tiptap li {
@@ -16,8 +21,11 @@
   display: flex;
   align-content: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--gap-md) var(--gap-xs);
   padding-bottom: var(--gap-md);
   margin-bottom: var(--gap-md);
+  border-bottom: var(--border-input);
 }
 
 .editor-toolbar button {
