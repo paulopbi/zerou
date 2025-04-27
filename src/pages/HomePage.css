@@ -1,5 +1,5 @@
 .home {
-  margin-block: var(--gap-xxl);
+  margin-block: var(--gap-big);
 }
 
 .home__heading {
@@ -10,31 +10,48 @@
   gap: var(--gap-xs);
   margin-inline: auto;
   width: 100%;
+  margin-bottom: var(--gap-big);
 }
 
 .home__title {
+  margin-bottom: var(--gap-md);
   color: var(--color-gray);
 }
 
 .home__input {
   width: 100%;
   max-width: 532px;
-  padding-left: 8px;
-  border: 1px solid var(--color-gray);
+  margin-bottom: var(--gap-xs);
   border-radius: var(--radius-xs);
 }
 
 .home__button {
   width: 100%;
   max-width: 532px;
-  height: 42px;
-  margin-top: var(--gap-xs);
 }
 
 .home__cards {
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(3, 310px);
+  justify-content: center;
+  grid-template-columns: repeat(1, 1fr);
   gap: var(--gap-big) var(--gap-xl);
-  margin-block: var(--gap-xxl);
+  margin-bottom: var(--gap-big);
+}
+
+@media screen and (min-width: 500px) {
+  .home__cards {
+    grid-template-columns: repeat(1, 400px);
+  }
+}
+
+@media screen and (min-width: 660px) {
+  .home__cards {
+    grid-template-columns: repeat(2, 310px);
+  }
+}
+@media screen and (min-width: 985px) {
+  .home__cards {
+    grid-template-columns: repeat(3, 310px);
+  }
 }
