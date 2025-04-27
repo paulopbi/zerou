@@ -1,11 +1,12 @@
 import "./AddGamePage.css";
 import { Link, useNavigate } from "react-router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { ToastType } from "@/types";
 import { TIMEOUT_VALUE } from "@/contants";
+import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";
 import RichTextEditor from "@/components/RichTextEditor";
@@ -14,17 +15,22 @@ import Toast from "@/components/Toast";
 const AddGamePage = () => {
   const [title, setTitle] = useState("");
   const [imageSource, setImageSource] = useState("");
-  const [platform, setPlatform] = useState("");
-  const [status, setStatus] = useState("");
+  const [platform, setPlatform] = useState("xbox");
+  const [status, setStatus] = useState("completed");
   const [editorContent, setEditorContent] = useState("");
   const [systemMessage, setSystemMessage] = useState<ToastType>({
     message: "",
     variant: null,
   });
 
+  const titleInputRef = useRef<null | HTMLInputElement>(null);
+  useEffect(() => {
+    if (titleInputRef.current) {
+      titleInputRef.current.focus();
+    }
+  }, []);
   const { user } = useAuth();
   const Navigate = useNavigate();
-
   const createGame = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSystemMessage({ message: "", variant: null });
@@ -32,22 +38,6 @@ const AddGamePage = () => {
     if (!title) {
       setSystemMessage({
         message: "O titulo é obrigatório",
-        variant: "danger",
-      });
-      return;
-    }
-
-    if (platform.length === 0) {
-      setSystemMessage({
-        message: "Selecione a plataforma.",
-        variant: "danger",
-      });
-      return;
-    }
-
-    if (status.length === 0) {
-      setSystemMessage({
-        message: "Selecione o status.",
         variant: "danger",
       });
       return;
@@ -107,63 +97,94 @@ const AddGamePage = () => {
   return (
     <>
       <Navbar />
+
       <section className="add-game container">
-        <h5>Adicione Um Jogo</h5>
+        <div className="add-game__heading">
+          <h4 className="title--brand text-center">Preencha os dados</h4>
+          <p className="text-center">
+            Quando finalizar o e salvar, o jogo irá para a sua lista.
+          </p>
+        </div>
 
         <form className="add-game__form" onSubmit={createGame}>
-          <input
-            type="text"
-            placeholder="Nome do jogo"
-            required
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="url"
-            placeholder="Digite a url da imagem"
-            value={imageSource}
-            onChange={(e) => setImageSource(e.target.value)}
-          />
+          <div className="add-game__form-group">
+            <label htmlFor="name" className="add-game__label">
+              Nome do jogo
+            </label>
+            <input
+              ref={titleInputRef}
+              className="add-game__input"
+              id="name"
+              type="text"
+              placeholder="Fallout 4, The Witcher, GTA..."
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
 
-          <select
-            value={platform}
-            onChange={(e) => setPlatform(e.target.value)}
-          >
-            <option value="" disabled>
-              Selecione a Plataforma
-            </option>
-            <option value="xbox">Xbox</option>
-            <option value="pc">PC</option>
-            <option value="playstation">Playstation</option>
-            <option value="nintendo">Nintendo</option>
-            <option value="mobile">Mobile</option>
-            <option value="steam deck">Steam Deck</option>
-          </select>
+          <div className="add-game__form-group">
+            <label htmlFor="image" className="add-game__label">
+              Digite a url da imagem
+            </label>
+            <input
+              className="add-game__input"
+              id="image"
+              type="url"
+              placeholder="https://www.imagem.com/foto-1.png"
+              value={imageSource}
+              onChange={(e) => setImageSource(e.target.value)}
+            />
+          </div>
 
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="" disabled>
-              Selecione o Status
-            </option>
-            <option value="completed">Finalizado</option>
-            <option value="playing">Jogando</option>
-            <option value="wishlist">Na lista</option>
-            <option value="replaying">Rejogando</option>
-            <option value="dont started">Não começei</option>
-          </select>
+          <div className="add-game__form-group">
+            <label htmlFor="platform" className="add-game__label">
+              Selecione a plataforma
+            </label>
+            <select
+              className="add-game__select"
+              id="platform"
+              value={platform}
+              onChange={(e) => setPlatform(e.target.value)}
+            >
+              <option value="xbox">Xbox</option>
+              <option value="pc">PC</option>
+              <option value="playstation">Playstation</option>
+              <option value="nintendo">Nintendo</option>
+              <option value="mobile">Mobile</option>
+              <option value="steam deck">Steam Deck</option>
+            </select>
+          </div>
+
+          <div className="add-game__form-group">
+            <label htmlFor="status" className="add-game__label">
+              Selecione o status
+            </label>
+            <select
+              className="add-game__select"
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="completed">Finalizado</option>
+              <option value="playing">Jogando</option>
+              <option value="wishlist">Na lista</option>
+              <option value="replaying">Rejogando</option>
+              <option value="dont started">Não começei</option>
+            </select>
+          </div>
 
           <RichTextEditor
             content={editorContent}
             onChange={handleEditorChange}
           />
 
-          <div className="add-game__form-buttons">
-            <Button type="submit" variant="success">
-              Salvar
-            </Button>
-            <Link to="/" className="button button--ghost">
-              Voltar
-            </Link>
-          </div>
+          <Button type="submit" variant="success">
+            Salvar
+          </Button>
+          <Link to="/" className="button button--ghost">
+            <ArrowLeft height={18} width={18} /> Voltar
+          </Link>
         </form>
 
         {systemMessage.message && systemMessage.variant && (
