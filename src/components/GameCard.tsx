@@ -1,39 +1,58 @@
 import "./GameCard.css";
-import { IDatabaseSchema } from "@/types";
+import { DatabaseSchemaType } from "@/types";
 import { getBadgeModifier } from "@/utils/getBadgeModifier";
 import { truncateText } from "@/utils/truncateText";
 import { X } from "lucide-react";
 import { Link } from "react-router";
-import { useState } from "react";
+import { motion } from "motion/react";
 import Button from "@/components/Button";
+import { useState } from "react";
+import { statusDictionary } from "@/utils/statusDictionary ";
 
 interface GameCardProps {
-  gameData: IDatabaseSchema;
+  gameData: DatabaseSchemaType;
   deleteGame: (gameID: string) => void;
 }
 
 const GameCard = ({ gameData, deleteGame }: GameCardProps) => {
-  const [isRemoving, setIsRemoving] = useState(false);
-
+  const [shouldAnimateWhenRemove, setShouldAnimateWhenRemove] = useState(false);
   const handleClick = () => {
-    setIsRemoving(true);
-
+    setShouldAnimateWhenRemove(true);
     setTimeout(() => {
       deleteGame(gameData.id);
-    }, 300); // tempo da animação em ms
+    }, 500);
+  };
+
+  const cardVariants = {
+    initial: { opacity: 0, y: -50 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -50 },
+    hover: {
+      y: -20,
+      scale: 1.02,
+      transition: { type: "spring", stiffness: 300 },
+    },
   };
 
   return (
-    <div className={`game-card ${isRemoving ? "removing" : ""}`}>
+    <motion.div
+      variants={cardVariants}
+      initial="initial"
+      whileHover="hover"
+      animate={shouldAnimateWhenRemove ? "exit" : "animate"}
+      transition={{ duration: 0.5 }}
+      className="game-card"
+    >
       <div className="game-card__controllers">
         <Button
           className="game-card__controllers-button"
           onClick={handleClick}
-          title="Ao clicar, o jogo será excluido."
+          title="Ao clicar, o jogo será excluído."
         >
           <X width={22} height={22} color="var(--color-danger-dark)" />
         </Button>
       </div>
+
       <div className="game-card__image-container">
         {gameData.image_source ? (
           <img
@@ -52,10 +71,10 @@ const GameCard = ({ gameData, deleteGame }: GameCardProps) => {
       </div>
 
       <div className="game-card__content">
-        <h6 className="game-card__title">{truncateText(gameData.title, 28)}</h6>
+        <h6 className="game-card__title">{truncateText(gameData.title, 26)}</h6>
         <div className="game-card__badges">
           <span className={`badge badge--${getBadgeModifier(gameData.status)}`}>
-            {gameData.status}
+            {statusDictionary(gameData.status)}
           </span>
           <span
             className={`badge badge--${getBadgeModifier(gameData.platform)}`}
@@ -70,7 +89,7 @@ const GameCard = ({ gameData, deleteGame }: GameCardProps) => {
           Ver Detalhes
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
