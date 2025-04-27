@@ -1,7 +1,6 @@
 .game-card {
   position: relative;
   overflow: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .game-card.removing {
@@ -60,16 +59,13 @@
 .game-card__image-label-text {
   text-align: center;
   text-transform: capitalize;
+  font-family: var(--font-serif);
   font-size: var(--fs-h6);
   font-weight: var(--font-weight-bold);
 }
 
 .game-card__content {
   margin-block: var(--gap-xs);
-}
-
-.game-card__title {
-  text-transform: capitalize;
 }
 
 .game-card__badges {
