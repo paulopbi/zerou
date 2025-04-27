@@ -46,7 +46,6 @@ const HomePage = () => {
     return () => {};
   }, []);
 
-  console.log(database);
   if (isLoading) {
     return <Loading />;
   }
