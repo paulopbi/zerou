@@ -5,9 +5,14 @@ type ButtonProps = {
   variant?: "default" | "ghost" | "danger" | "success";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ variant = "default", children, ...props }: ButtonProps) => {
+const Button = ({
+  variant = "default",
+  children,
+
+  ...props
+}: ButtonProps) => {
   return (
-    <button className={`button button--${variant}`} {...props}>
+    <button className={`button button--${variant} `} {...props}>
       {children}
     </button>
   );
