@@ -3,22 +3,28 @@ import { Link, useParams } from "react-router";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useEffect, useState } from "react";
-import { DatabaseSchemaType } from "@/types";
+import { DatabaseSchemaType, ToastType } from "@/types";
 import { getBadgeModifier } from "@/utils/getBadgeModifier";
 import { ArrowLeft } from "lucide-react";
+import { statusDictionary } from "@/utils/statusDictionary ";
 import RichTextEditor from "@/components/RichTextEditor";
 import Button from "@/components/Button";
 import Navbar from "@/components/Navbar";
+import Toast from "@/components/Toast";
 
 const DetailedGame = () => {
   const { id } = useParams<{ id: string }>();
   const [gameData, setGameData] = useState<DatabaseSchemaType | null>(null);
   const [editorContent, setEditorContent] = useState(gameData?.description);
   const [isSaving, setIsSaving] = useState(false);
-  const [error, setError] = useState("");
-  const [systemMessage, setSystemMessage] = useState("");
+  const [canSave, setCanSave] = useState(true);
+  const [systemMessage, setSystemMessage] = useState<ToastType>({
+    message: "",
+    variant: null,
+  });
 
   const handleEditorChange = (newContent: string) => {
+    setCanSave(false);
     setEditorContent(newContent);
   };
 
@@ -26,8 +32,7 @@ const DetailedGame = () => {
     if (!id || !gameData) return;
 
     setIsSaving(true);
-    setError("");
-    setSystemMessage("");
+    setSystemMessage({ message: "", variant: null });
 
     try {
       const gameRef = doc(db, "games", id);
@@ -38,11 +43,17 @@ const DetailedGame = () => {
       setGameData(
         (prev) => prev && { ...prev, description: editorContent || "" }
       );
-      setSystemMessage("Descrição salva com sucesso!");
-      setTimeout(() => setSystemMessage(""), 3000);
+      setSystemMessage({
+        message: "Descrição salva com sucesso!",
+        variant: "success",
+      });
+      setTimeout(() => setSystemMessage({ message: "", variant: null }), 3000);
     } catch (error) {
       console.error(error);
-      setError("Algo deu errado ao salvar os dados, tente novamente!");
+      setSystemMessage({
+        message: "Algo deu errado ao salvar os dados, tente novamente!",
+        variant: "danger",
+      });
     } finally {
       setIsSaving(false);
     }
@@ -50,11 +61,13 @@ const DetailedGame = () => {
 
   useEffect(() => {
     const getDatabaseGames = async () => {
-      setError("");
-      setSystemMessage("");
+      setSystemMessage({ message: "", variant: null });
 
       if (!id) {
-        setError("Algo deu errado ao conectar com o banco de dados.");
+        setSystemMessage({
+          message: "Algo deu errado ao conectar com o banco de dados.",
+          variant: "danger",
+        });
         return;
       }
 
@@ -63,14 +76,20 @@ const DetailedGame = () => {
         const gameSnap = await getDoc(gameRef);
 
         if (!gameSnap.exists()) {
-          setError("Jogo não encontrdo, tente novamente");
+          setSystemMessage({
+            message: "Jogo não encontrdo, tente novamente",
+            variant: "danger",
+          });
           return;
         }
 
         setGameData(gameSnap.data() as DatabaseSchemaType);
       } catch (error) {
         console.error(error);
-        setError("Algo deu errado, tente novamente");
+        setSystemMessage({
+          message: "Algo deu errado, tente novamente",
+          variant: "danger",
+        });
       }
     };
     getDatabaseGames();
@@ -94,7 +113,7 @@ const DetailedGame = () => {
             <h1 className="detailed__background-text">{gameData.title}</h1>
           </div>
         )}
-        <section className="container detailed">
+        <section className="container">
           <Link to="/" className="detailed__link">
             <ArrowLeft /> Voltar
           </Link>
@@ -105,7 +124,7 @@ const DetailedGame = () => {
             <span
               className={`badge badge--${getBadgeModifier(gameData.status)}`}
             >
-              {gameData.status}
+              {statusDictionary(gameData.status)}
             </span>
             <span
               className={`badge badge--${getBadgeModifier(gameData.platform)}`}
@@ -124,27 +143,19 @@ const DetailedGame = () => {
             </div>
           )}
 
-          <Button
-            onClick={saveDescription}
-            disabled={isSaving || editorContent === gameData.description}
-            variant="success"
-          >
-            {isSaving ? "Salvando..." : "Salvar Descrição"}
-          </Button>
+          <div className="detailed__btn-controll">
+            <Button
+              onClick={saveDescription}
+              disabled={isSaving || canSave}
+              variant="success"
+            >
+              {isSaving ? "Salvando..." : "Salvar Descrição"}
+            </Button>
+          </div>
         </section>
 
-        {error && (
-          <div className="system-message">
-            <p className="message-info--dark system-message__text">{error}</p>
-          </div>
-        )}
-
-        {systemMessage && (
-          <div className="system-message">
-            <p className="message-info--dark system-message__text">
-              {systemMessage}
-            </p>
-          </div>
+        {systemMessage.message && systemMessage.variant && (
+          <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
         )}
       </>
     );
