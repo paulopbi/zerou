@@ -1,7 +1,7 @@
 import "./LoginPage.css";
 import { Link, useNavigate } from "react-router";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_VALUE } from "@/contants";
+import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
 import { FirebaseError } from "firebase/app";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -24,7 +24,6 @@ const LoginPage = () => {
     if (loginInputRef.current) {
       loginInputRef.current.focus();
     }
-    return () => {};
   }, []);
 
   const navigate = useNavigate();
@@ -63,7 +62,7 @@ const LoginPage = () => {
         setSystemMessage({ message: "", variant: null });
         setIsLoading(false);
         navigate("/");
-      }, TIMEOUT_VALUE);
+      }, TIMEOUT_TO_REMOVE_TOAST);
     } catch (error) {
       if (error instanceof FirebaseError) {
         const firebaseErrorResponse = firebaseErrorHandler(error);
