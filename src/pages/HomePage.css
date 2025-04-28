@@ -14,15 +14,12 @@
 }
 
 .home__title {
-  margin-bottom: var(--gap-md);
-  color: var(--color-gray);
-}
-
-.home__input {
+  font-weight: var(--font-weight-medium);
+  max-width: var(--screen-mobile);
   width: 100%;
-  max-width: 532px;
-  margin-bottom: var(--gap-xs);
-  border-radius: var(--radius-xs);
+  margin-bottom: var(--gap-md);
+  text-align: center;
+  color: var(--color-gray);
 }
 
 .home__button {
