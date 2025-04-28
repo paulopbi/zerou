@@ -1,8 +1,14 @@
 import "./AboutPage.css";
 import { motion } from "motion/react";
-import Navbar from "@/components/Navbar";
+import { Link } from "react-router";
+import { ArrowLeft } from "lucide-react";
 
 const containerVariants = {
+  initial: { opacity: 0, translateY: -30 },
+  animate: { opacity: 1, translateY: 0 },
+};
+
+const linksContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -13,21 +19,25 @@ const containerVariants = {
 };
 
 const linkVariants = {
-  hidden: { opacity: 0, translateY: -10 },
-  visible: { opacity: 1, translateY: 0 },
+  hidden: { opacity: 0, translateY: -10, scale: 0.8 },
+  visible: { opacity: 1, translateY: 0, scale: 1 },
 };
 
 const AboutPage = () => {
   return (
     <>
-      <Navbar />
       <section className="about container">
         <motion.div
-          initial={{ opacity: 0, translateY: "-30px" }}
-          animate={{ opacity: 1, translateY: "0" }}
+          variants={containerVariants}
+          initial="initial"
+          animate="animate"
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="about__content"
         >
+          <Link to="/" className="about__link">
+            <ArrowLeft />
+            Voltar
+          </Link>
           <h1 className="title">Sobre</h1>
           <p className="about__text">
             Olá! Meu nome é <strong>Paulo Victor</strong>, sou{" "}
@@ -43,7 +53,7 @@ const AboutPage = () => {
 
           <motion.div
             className="about__socials"
-            variants={containerVariants}
+            variants={linksContainerVariants}
             initial="hidden"
             animate="visible"
           >
