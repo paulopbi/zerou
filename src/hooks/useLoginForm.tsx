@@ -67,8 +67,10 @@ const useLoginForm = () => {
       navigate("/");
     } catch (error) {
       if (error instanceof FirebaseError) {
-        const firebaseErrorResponse = firebaseErrorHandler(error);
-        setSystemMessage({ message: firebaseErrorResponse, variant: "danger" });
+        setSystemMessage({
+          message: firebaseErrorHandler(error),
+          variant: "danger",
+        });
         setIsLoading(false);
         return;
       }
