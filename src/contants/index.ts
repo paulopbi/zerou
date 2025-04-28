@@ -1,2 +1,2 @@
 export const PASSWORD_MIN_LENGTH = 6;
-export const TIMEOUT_VALUE = 2000;
+export const TIMEOUT_TO_REMOVE_TOAST = 2000;
