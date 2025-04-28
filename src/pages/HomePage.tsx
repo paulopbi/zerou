@@ -71,7 +71,7 @@ const HomePage = () => {
         <Navbar />
         {/* no content */}
         <section className="container">
-          <WithoutGame />
+          <WithoutGame user={user} />
         </section>
       </>
     );
