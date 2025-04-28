@@ -1,30 +1,11 @@
 import "./CreateAccountPage.css";
-import { Link, useNavigate } from "react-router";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  updateProfile,
-} from "firebase/auth";
-import { auth } from "@/config/firebase";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
-import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
-import { FirebaseError } from "firebase/app";
-import { ToastType } from "@/types";
+import { Link } from "react-router";
+import { useEffect, useRef } from "react";
 import Button from "@/components/Button";
 import Toast from "@/components/Toast";
+import useCreateAccount from "@/hooks/useCreateAccount";
 
 const CreateAccountPage = () => {
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [systemMessage, setSystemMessage] = useState<ToastType>({
-    message: "",
-    variant: null,
-  });
-
   const userInputRef = useRef<null | HTMLInputElement>(null);
   useEffect(() => {
     if (userInputRef.current) {
@@ -33,86 +14,19 @@ const CreateAccountPage = () => {
     return () => {};
   }, []);
 
-  const navigate = useNavigate();
-  const handleCreateAccount = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setSystemMessage({ message: "", variant: null });
-
-    if (!displayName || !email || !password || !confirmPassword) {
-      setSystemMessage({
-        message: "Todos os campos precisam ser preenchidos.",
-        variant: "danger",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    if (
-      password.length < PASSWORD_MIN_LENGTH ||
-      confirmPassword.length < PASSWORD_MIN_LENGTH
-    ) {
-      setSystemMessage({
-        message: `A senha precisa ter mais de ${PASSWORD_MIN_LENGTH} caracteres.`,
-        variant: "danger",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setSystemMessage({
-        message: "As senhas precisam ser iguais!",
-        variant: "danger",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const newUser = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      await sendEmailVerification(newUser.user);
-      await updateProfile(newUser.user, { displayName });
-
-      setSystemMessage({
-        message: "Usuário criado com sucesso!",
-        variant: "success",
-      });
-
-      setDisplayName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-
-      setTimeout(() => {
-        setSystemMessage({ message: "", variant: null });
-        navigate("/login");
-        setIsLoading(false);
-      }, TIMEOUT_TO_REMOVE_TOAST);
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        const firebaseReturnErrorMessage = firebaseErrorHandler(error);
-        setSystemMessage({
-          message: firebaseReturnErrorMessage,
-          variant: "danger",
-        });
-        console.error("Algo deu errado: " + error);
-        setIsLoading(false);
-        return;
-      }
-      console.error("Algo deu errado: " + error);
-      setSystemMessage({
-        message: "Algo deu errado tente novamente mais tarde!",
-        variant: "danger",
-      });
-      setIsLoading(false);
-    }
-  };
+  const {
+    handleCreateAccount,
+    setDisplayName,
+    setPassword,
+    setConfirmPassword,
+    setEmail,
+    email,
+    password,
+    confirmPassword,
+    displayName,
+    isLoading,
+    systemMessage,
+  } = useCreateAccount();
 
   return (
     <section className="create-account container">
