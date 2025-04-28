@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_VALUE } from "@/contants";
+import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { FirebaseError } from "firebase/app";
 import { ToastType } from "@/types";
@@ -93,7 +93,7 @@ const CreateAccountPage = () => {
         setSystemMessage({ message: "", variant: null });
         navigate("/login");
         setIsLoading(false);
-      }, TIMEOUT_VALUE);
+      }, TIMEOUT_TO_REMOVE_TOAST);
     } catch (error) {
       if (error instanceof FirebaseError) {
         const firebaseReturnErrorMessage = firebaseErrorHandler(error);
