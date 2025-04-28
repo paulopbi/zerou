@@ -1,5 +1,5 @@
 import { auth } from "@/config/firebase";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
+import { PASSWORD_MIN_LENGTH } from "@/constants";
 import { ToastType } from "@/types";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { FirebaseError } from "firebase/app";
@@ -49,21 +49,11 @@ const useLoginForm = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setSystemMessage({
-        message: "Login feito com sucesso!",
-        variant: "success",
-      });
 
       setEmail("");
       setPassword("");
-
-      setTimeout(() => {
-        setSystemMessage({
-          message: "",
-          variant: null,
-        });
-      }, TIMEOUT_TO_REMOVE_TOAST);
       setIsLoading(false);
+
       navigate("/");
     } catch (error) {
       if (error instanceof FirebaseError) {
