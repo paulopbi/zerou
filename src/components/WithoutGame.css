@@ -8,6 +8,11 @@
   height: 100dvh;
 }
 
+.empty-state__title {
+  max-width: var(--screen-phone);
+  text-align: center;
+}
+
 .empty-state__button {
   width: 100%;
   max-width: 300px;
