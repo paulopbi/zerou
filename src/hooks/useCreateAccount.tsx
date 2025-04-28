@@ -1,5 +1,5 @@
 import { auth } from "@/config/firebase";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
+import { PASSWORD_MIN_LENGTH } from "@/constants";
 import { ToastType } from "@/types";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { FirebaseError } from "firebase/app";
@@ -72,23 +72,12 @@ const useCreateAccount = () => {
       await sendEmailVerification(newUser.user);
       await updateProfile(newUser.user, { displayName });
 
-      setSystemMessage({
-        message: "Usuário criado com sucesso!",
-        variant: "success",
-      });
-
       setDisplayName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-
-      setTimeout(() => {
-        setSystemMessage({
-          message: "",
-          variant: null,
-        });
-      }, TIMEOUT_TO_REMOVE_TOAST);
       setIsLoading(false);
+
       navigate("/login");
     } catch (error) {
       if (error instanceof FirebaseError) {
