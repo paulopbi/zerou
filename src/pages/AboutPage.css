@@ -3,6 +3,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.about__link {
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+  margin-bottom: var(--gap-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand);
 }
 
 .about__content {
