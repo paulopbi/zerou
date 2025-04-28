@@ -1,24 +1,11 @@
 import "./LoginPage.css";
-import { Link, useNavigate } from "react-router";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
-import { FirebaseError } from "firebase/app";
-import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/config/firebase";
-import { ToastType } from "@/types";
+import { Link } from "react-router";
+import { useEffect, useRef } from "react";
 import Button from "@/components/Button";
 import Toast from "@/components/Toast";
+import useLoginForm from "@/hooks/useLoginForm";
 
 const LoginPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [systemMessage, setSystemMessage] = useState<ToastType>({
-    message: "",
-    variant: null,
-  });
-
   const loginInputRef = useRef<null | HTMLInputElement>(null);
   useEffect(() => {
     if (loginInputRef.current) {
@@ -26,59 +13,16 @@ const LoginPage = () => {
     }
   }, []);
 
-  const navigate = useNavigate();
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setSystemMessage({ message: "", variant: null });
+  const {
+    handleLogin,
+    setEmail,
+    email,
+    setPassword,
+    password,
+    systemMessage,
+    isLoading,
+  } = useLoginForm();
 
-    if (!email || !password) {
-      setSystemMessage({
-        message: "Todos os campos precisam ser preenchidos!",
-        variant: "danger",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    if (password.length < PASSWORD_MIN_LENGTH) {
-      setSystemMessage({
-        message: `A senha precisa ter no mínimo ${PASSWORD_MIN_LENGTH} caracteres`,
-        variant: "danger",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-
-      setSystemMessage({
-        message: "Login feito com sucesso!",
-        variant: "success",
-      });
-
-      setTimeout(() => {
-        setSystemMessage({ message: "", variant: null });
-        setIsLoading(false);
-        navigate("/");
-      }, TIMEOUT_TO_REMOVE_TOAST);
-    } catch (error) {
-      if (error instanceof FirebaseError) {
-        const firebaseErrorResponse = firebaseErrorHandler(error);
-        setSystemMessage({ message: firebaseErrorResponse, variant: "danger" });
-        console.error(error);
-        setIsLoading(false);
-        return;
-      }
-      console.error("Algo deu errado: " + error);
-      setSystemMessage({
-        message: "Algo deu errado tente novamente mais tarde!",
-        variant: "danger",
-      });
-      setIsLoading(false);
-    }
-  };
   return (
     <section className="login container">
       <h1 className="title--brand">Zerou</h1>
