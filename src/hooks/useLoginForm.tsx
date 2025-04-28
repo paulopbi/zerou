@@ -54,6 +54,9 @@ const useLoginForm = () => {
         variant: "success",
       });
 
+      setEmail("");
+      setPassword("");
+
       setTimeout(() => {
         setSystemMessage({
           message: "",
@@ -73,6 +76,7 @@ const useLoginForm = () => {
         message: "Não foi possível fazer login, tente novamente.",
         variant: "danger",
       });
+      console.error(error);
       setIsLoading(false);
     } finally {
       setIsLoading(false);
@@ -82,10 +86,10 @@ const useLoginForm = () => {
   return {
     isLoading,
     email,
-    setEmail,
     password,
-    setPassword,
     systemMessage,
+    setEmail,
+    setPassword,
     setSystemMessage,
     handleLogin,
   };
