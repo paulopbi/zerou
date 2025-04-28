@@ -5,6 +5,8 @@ import HomePage from "@/pages/HomePage";
 import PrivateRoute from "./PrivateRoute";
 import AddGamePage from "@/pages/AddGamePage";
 import DetailedGame from "@/pages/DetailedGame";
+import AboutPage from "@/pages/AboutPage";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 export default function Router() {
   return (
@@ -12,6 +14,7 @@ export default function Router() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/criar-conta" element={<CreateAccountPage />} />
+        <Route path="/sobre" element={<AboutPage />} />
         <Route
           path="/"
           element={
@@ -36,7 +39,7 @@ export default function Router() {
             </PrivateRoute>
           }
         />
-        <Route path="*" element={<h1>Não existe</h1>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
