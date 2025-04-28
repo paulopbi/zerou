@@ -4,51 +4,66 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getFirestoreCollection } from "@/utils/getFirestoreCollection";
 import { useAuth } from "@/contexts/AuthContext";
-import { DatabaseSchemaType } from "@/types";
+import { DatabaseSchemaType, ToastType } from "@/types";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import Navbar from "@/components/Navbar";
 import WithoutGame from "@/components/WithoutGame";
 import GameCard from "@/components/GameCard";
 import Loading from "@/components/Loading";
+import Toast from "@/components/Toast";
+import { TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
 
 const HomePage = () => {
   const [database, setDatabase] = useState<null | DatabaseSchemaType[]>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-
+  const [systemMessage, setSystemMessage] = useState<ToastType>({
+    message: "",
+    variant: null,
+  });
   const { user } = useAuth();
 
   const handleDeleteGame = async (gameID: string) => {
-    await deleteDoc(doc(db, "games", gameID));
-    setDatabase((prev) => prev?.filter((game) => game.id !== gameID) || []);
-    return;
+    setSystemMessage({ message: "", variant: null });
+    try {
+      await deleteDoc(doc(db, "games", gameID));
+      setDatabase((prev) => prev?.filter((game) => game.id !== gameID) || []);
+      setSystemMessage({
+        message: "Jogo excluido com sucesso!",
+        variant: "success",
+      });
+
+      setTimeout(() => {
+        setSystemMessage({ message: "", variant: null });
+      }, TIMEOUT_TO_REMOVE_TOAST);
+    } catch (error) {
+      console.error("Algo deu errado: " + error);
+      setSystemMessage({
+        message: "Algo deu errado ao excluir o jogo, tente novamente!",
+        variant: "danger",
+      });
+    }
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      setError("");
+      setSystemMessage({ message: "", variant: null });
       setIsLoading(true);
-
       try {
         const databaseResponse = await getFirestoreCollection("games");
         setDatabase(databaseResponse);
       } catch (error) {
-        console.log("algo deu errado: " + error);
-        setError("Algo deu errado, tente novamente.");
+        console.error("algo deu errado: " + error);
+        setSystemMessage({
+          message: "Algo deu errado, tente novamente.",
+          variant: "danger",
+        });
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchData();
-
-    return () => {};
   }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   if (!database || database.length === 0) {
     return (
@@ -64,36 +79,33 @@ const HomePage = () => {
 
   return (
     <>
+      {isLoading && <Loading />}
       <Navbar />
       <section className="home container">
         <div className="home__heading">
-          <h6 className="home__title">
+          <p className="home__title">
             {user?.displayName
-              ? `Olá ${user.displayName}, Pesquise por algum jogo...`
-              : "Pesquise por algum jogo..."}
-          </h6>
-          <input
-            type="text"
-            className="home__input"
-            placeholder="Pesquise pelos seus jogos..."
-          />
+              ? `Olá ${user.displayName}, adicione algum jogo clicando no botão abaixo.`
+              : "Adicione algum jogo clicando no botão abaixo."}
+          </p>
           <Link to="/adicionar" className="home__button button button--default">
             Adicionar Jogo <PlusIcon width={24} height={24} />
           </Link>
         </div>
 
-        {error && <p className="message-error text-center">{error}</p>}
-
         <article className="home__cards">
           {database.map((game) => (
             <GameCard
-              key={game.title}
+              key={game.id}
               gameData={game}
               deleteGame={handleDeleteGame}
             />
           ))}
         </article>
       </section>
+      {systemMessage.message && systemMessage.variant && (
+        <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
+      )}
     </>
   );
 };
