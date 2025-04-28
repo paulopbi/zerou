@@ -5,7 +5,7 @@ import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { ToastType } from "@/types";
-import { TIMEOUT_VALUE } from "@/contants";
+import { TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";
@@ -75,7 +75,8 @@ const AddGamePage = () => {
       setTimeout(() => {
         setSystemMessage({ message: "", variant: null });
         Navigate("/");
-      }, TIMEOUT_VALUE);
+      }, TIMEOUT_TO_REMOVE_TOAST);
+
       setTitle("");
       setImageSource("");
       setPlatform("");
