@@ -86,7 +86,7 @@ const LoginPage = () => {
 
       <main className="login__main">
         <div className="login__heading">
-          <h4 className="title">Seja bem-vindo!</h4>
+          <h4 className="title">Fazer Login</h4>
           <p className="text-center">
             Digite seu email e senha para acessar sua conta.
           </p>
