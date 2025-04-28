@@ -120,9 +120,9 @@ const CreateAccountPage = () => {
 
       <main className="create-account__main">
         <div className="create-account__heading">
-          <h4 className="title">Seja bem vindo</h4>
+          <h4 className="title">Criar Conta</h4>
           <p className="text-center">
-            Crie uma conta para acompanhar seus jogos zerados!
+            Crie uma conta para acompanhar seus jogos!
           </p>
         </div>
 
