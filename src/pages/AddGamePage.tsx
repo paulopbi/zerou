@@ -5,7 +5,7 @@ import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { ToastType } from "@/types";
-import { TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
+import { TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";

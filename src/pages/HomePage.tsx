@@ -7,12 +7,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import { DatabaseSchemaType, ToastType } from "@/types";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "@/config/firebase";
+import { TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
 import Navbar from "@/components/Navbar";
 import WithoutGame from "@/components/WithoutGame";
 import GameCard from "@/components/GameCard";
 import Loading from "@/components/Loading";
 import Toast from "@/components/Toast";
-import { TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
 
 const HomePage = () => {
   const [database, setDatabase] = useState<null | DatabaseSchemaType[]>(null);

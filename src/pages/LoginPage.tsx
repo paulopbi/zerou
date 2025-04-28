@@ -1,7 +1,7 @@
 import "./LoginPage.css";
 import { Link, useNavigate } from "react-router";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
+import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
 import { FirebaseError } from "firebase/app";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { signInWithEmailAndPassword } from "firebase/auth";

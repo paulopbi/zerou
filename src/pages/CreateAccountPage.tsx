@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
-import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/contants";
+import { PASSWORD_MIN_LENGTH, TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
 import { firebaseErrorHandler } from "@/utils/firebaseErrorHandler";
 import { FirebaseError } from "firebase/app";
 import { ToastType } from "@/types";
