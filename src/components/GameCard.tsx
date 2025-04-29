@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { statusDictionary } from "@/utils/statusDictionary ";
+import { useEffect } from "react";
 import Button from "@/components/Button";
 import useDeleteGame from "@/hooks/useDeleteGame";
 import Toast from "./Toast";
@@ -32,10 +33,11 @@ const GameCard = ({ gameData, onDelete }: GameCardProps) => {
     "games"
   );
 
-  const handleDeleteClick = async () => {
-    await handleDelete();
-    onDelete(gameData.id);
-  };
+  useEffect(() => {
+    if (isDeleted) {
+      onDelete(gameData.id);
+    }
+  }, [isDeleted]);
 
   return (
     <>
@@ -51,7 +53,7 @@ const GameCard = ({ gameData, onDelete }: GameCardProps) => {
           <Button
             className="game-card__controllers-button"
             title="Ao clicar, o jogo será excluído."
-            onClick={handleDeleteClick}
+            onClick={handleDelete}
           >
             <X width={22} height={22} color="var(--color-danger-dark)" />
           </Button>
@@ -98,6 +100,7 @@ const GameCard = ({ gameData, onDelete }: GameCardProps) => {
           </Link>
         </div>
       </motion.div>
+
       {systemMessage.message && systemMessage.variant && (
         <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
       )}
