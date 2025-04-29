@@ -1,18 +1,14 @@
 import "./CreateAccountPage.css";
 import { Link } from "react-router";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Button from "@/components/Button";
 import Toast from "@/components/Toast";
 import useCreateAccount from "@/hooks/useCreateAccount";
+import useFocus from "@/hooks/useFocus";
 
 const CreateAccountPage = () => {
   const userInputRef = useRef<null | HTMLInputElement>(null);
-  useEffect(() => {
-    if (userInputRef.current) {
-      userInputRef.current.focus();
-    }
-    return () => {};
-  }, []);
+  useFocus(userInputRef);
 
   const {
     handleCreateAccount,
