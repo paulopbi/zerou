@@ -7,12 +7,17 @@ import WithoutGame from "@/components/WithoutGame";
 import GameCard from "@/components/GameCard";
 import Loading from "@/components/Loading";
 import Toast from "@/components/Toast";
-import useGameData from "@/hooks/useGameData";
+import { DatabaseSchemaType } from "@/types";
+import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
 
 const HomePage = () => {
   const { user } = useAuth();
-  const { database, isLoading, systemMessage, setDatabase } = useGameData();
-
+  const {
+    data: database,
+    isLoading,
+    systemMessage,
+    setData,
+  } = useFirestoreCollection<DatabaseSchemaType>("games");
   return (
     <>
       <Navbar />
@@ -42,7 +47,7 @@ const HomePage = () => {
                 key={game.id}
                 gameData={game}
                 onDelete={(id) =>
-                  setDatabase(
+                  setData(
                     (prev) => prev?.filter((game) => game.id !== id) || []
                   )
                 }
