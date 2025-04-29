@@ -44,6 +44,7 @@ const LoginPage = () => {
               ref={loginInputRef}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               id="email"
               type="email"
               placeholder="Digite seu melhor email"
@@ -59,6 +60,7 @@ const LoginPage = () => {
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
               id="password"
               type="password"
               placeholder="Digite sua senha secreta"
