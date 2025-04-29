@@ -49,6 +49,14 @@ const useAddGame = () => {
     setIsLoading(true);
     setSystemMessage({ message: "", variant: null });
 
+    if (!user) {
+      setSystemMessage({
+        message: "Você precisa estar logado",
+        variant: "danger",
+      });
+      return;
+    }
+
     if (!validateAddGameForm()) {
       setIsLoading(false);
       return;
@@ -60,7 +68,7 @@ const useAddGame = () => {
 
       const databaseSchema = {
         id: newGameRef.id,
-        user_id: user?.uid,
+        user_id: user.uid,
         image_source: imageSource,
         title,
         platform,
@@ -77,6 +85,7 @@ const useAddGame = () => {
       });
 
       resetForm();
+
       setTimeout(() => {
         setSystemMessage({ message: "", variant: null });
         navigate("/");
