@@ -1,95 +1,33 @@
 import "./AddGamePage.css";
-import { Link, useNavigate } from "react-router";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
-import { db } from "@/config/firebase";
-import { useAuth } from "@/contexts/AuthContext";
-import { ToastType } from "@/types";
-import { TIMEOUT_TO_REMOVE_TOAST } from "@/constants";
+import { Link } from "react-router";
+import { useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";
 import RichTextEditor from "@/components/RichTextEditor";
 import Toast from "@/components/Toast";
+import useAddGame from "@/hooks/useAddGame";
+import useFocus from "@/hooks/useFocus";
 
 const AddGamePage = () => {
-  const [title, setTitle] = useState("");
-  const [imageSource, setImageSource] = useState("");
-  const [platform, setPlatform] = useState("xbox");
-  const [status, setStatus] = useState("completed");
-  const [editorContent, setEditorContent] = useState("");
-  const [systemMessage, setSystemMessage] = useState<ToastType>({
-    message: "",
-    variant: null,
-  });
-
   const titleInputRef = useRef<null | HTMLInputElement>(null);
-  useEffect(() => {
-    if (titleInputRef.current) {
-      titleInputRef.current.focus();
-    }
-  }, []);
-  const { user } = useAuth();
-  const Navigate = useNavigate();
-  const createGame = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSystemMessage({ message: "", variant: null });
+  useFocus(titleInputRef);
 
-    if (!title) {
-      setSystemMessage({
-        message: "O titulo é obrigatório",
-        variant: "danger",
-      });
-      return;
-    }
-
-    if (!user) {
-      setSystemMessage({
-        message: "Algo deu errado com seu login, tente novamente.",
-        variant: "danger",
-      });
-      return;
-    }
-
-    try {
-      const gameCollectionRef = collection(db, "games");
-      const newDocRef = doc(gameCollectionRef);
-
-      const databaseSchema = {
-        id: newDocRef.id,
-        user_id: user.uid,
-        title: title,
-        image_source: imageSource,
-        platform,
-        status,
-        description: editorContent,
-        created_at: Timestamp.now(),
-      };
-
-      await setDoc(newDocRef, databaseSchema);
-      setSystemMessage({
-        message: "Jogo adicionado com sucesso!",
-        variant: "success",
-      });
-
-      setTimeout(() => {
-        setSystemMessage({ message: "", variant: null });
-        Navigate("/");
-      }, TIMEOUT_TO_REMOVE_TOAST);
-
-      setTitle("");
-      setImageSource("");
-      setPlatform("");
-      setStatus("");
-      setEditorContent("");
-    } catch (error) {
-      setSystemMessage({
-        message: "Algo deu errado, tente novamente mais tarde.",
-        variant: "danger",
-      });
-      console.error("erro: " + error);
-    }
-  };
+  const {
+    handleAddGame,
+    setTitle,
+    setImageSource,
+    setPlatform,
+    setStatus,
+    setEditorContent,
+    isLoading,
+    title,
+    imageSource,
+    platform,
+    status,
+    editorContent,
+    systemMessage,
+  } = useAddGame();
 
   const handleEditorChange = (newContent: string) => {
     setEditorContent(newContent);
@@ -98,7 +36,6 @@ const AddGamePage = () => {
   return (
     <>
       <Navbar />
-
       <section className="add-game container">
         <div className="add-game__heading">
           <h4 className="title--brand text-center">Preencha os dados</h4>
@@ -107,7 +44,8 @@ const AddGamePage = () => {
           </p>
         </div>
 
-        <form className="add-game__form" onSubmit={createGame}>
+        <form className="add-game__form" onSubmit={handleAddGame}>
+          {/* title group */}
           <div className="add-game__form-group">
             <label htmlFor="name" className="add-game__label">
               Nome do jogo
@@ -118,12 +56,12 @@ const AddGamePage = () => {
               id="name"
               type="text"
               placeholder="Fallout 4, The Witcher, GTA..."
-              required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
 
+          {/* image group */}
           <div className="add-game__form-group">
             <label htmlFor="image" className="add-game__label">
               Digite a url da imagem
@@ -138,6 +76,7 @@ const AddGamePage = () => {
             />
           </div>
 
+          {/* platform group */}
           <div className="add-game__form-group">
             <label htmlFor="platform" className="add-game__label">
               Selecione a plataforma
@@ -157,6 +96,7 @@ const AddGamePage = () => {
             </select>
           </div>
 
+          {/* status group */}
           <div className="add-game__form-group">
             <label htmlFor="status" className="add-game__label">
               Selecione o status
@@ -180,18 +120,24 @@ const AddGamePage = () => {
             onChange={handleEditorChange}
           />
 
-          <Button type="submit" variant="success">
-            Salvar
-          </Button>
+          {isLoading ? (
+            <Button type="submit" variant="success" disabled>
+              Salvando...
+            </Button>
+          ) : (
+            <Button type="submit" variant="success">
+              Salvar
+            </Button>
+          )}
           <Link to="/" className="button button--ghost">
             <ArrowLeft height={18} width={18} /> Voltar
           </Link>
         </form>
-
-        {systemMessage.message && systemMessage.variant && (
-          <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
-        )}
       </section>
+
+      {systemMessage.message && systemMessage.variant && (
+        <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
+      )}
     </>
   );
 };
