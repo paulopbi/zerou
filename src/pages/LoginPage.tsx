@@ -1,17 +1,14 @@
 import "./LoginPage.css";
 import { Link } from "react-router";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Button from "@/components/Button";
 import Toast from "@/components/Toast";
 import useLoginForm from "@/hooks/useLoginForm";
+import useFocus from "@/hooks/useFocus";
 
 const LoginPage = () => {
   const loginInputRef = useRef<null | HTMLInputElement>(null);
-  useEffect(() => {
-    if (loginInputRef.current) {
-      loginInputRef.current.focus();
-    }
-  }, []);
+  useFocus(loginInputRef);
 
   const {
     handleLogin,
