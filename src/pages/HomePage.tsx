@@ -17,25 +17,25 @@ const HomePage = () => {
     <>
       <Navbar />
 
-      <main className="home container">
-        <div className="home__heading">
-          <p className="home__title">
-            {user?.displayName
-              ? `Olá ${user.displayName}, adicione algum jogo clicando no botão abaixo.`
-              : "Adicione algum jogo clicando no botão abaixo."}
-          </p>
-          <Link to="/adicionar" className="home__button button button--default">
-            Adicionar Jogo <PlusIcon width={24} height={24} />
-          </Link>
-        </div>
+      {database && database.length > 0 && (
+        <main className="home container">
+          <div className="home__heading">
+            {user?.displayName ? (
+              <p className="home__title">
+                Olá {user.displayName}, adicione algum jogo clicando no botão
+                abaixo.
+              </p>
+            ) : (
+              <p>Adicione algum jogo clicando no botão abaixo.</p>
+            )}
+            <Link
+              to="/adicionar"
+              className="home__button button button--default"
+            >
+              Adicionar Jogo <PlusIcon width={24} height={24} />
+            </Link>
+          </div>
 
-        {(!database || database.length === 0) && (
-          <section className="container">
-            <WithoutGame user={user} />
-          </section>
-        )}
-
-        {database && (
           <article className="home__cards">
             {database.map((game) => (
               <GameCard
@@ -49,14 +49,20 @@ const HomePage = () => {
               />
             ))}
           </article>
-        )}
+        </main>
+      )}
 
-        {systemMessage.message && systemMessage.variant && (
-          <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
-        )}
+      {(!database || database.length === 0) && (
+        <section className="container">
+          <WithoutGame user={user} />
+        </section>
+      )}
 
-        {isLoading && <Loading />}
-      </main>
+      {systemMessage.message && systemMessage.variant && (
+        <Toast variant={systemMessage.variant}>{systemMessage.message}</Toast>
+      )}
+
+      {isLoading && <Loading />}
     </>
   );
 };
