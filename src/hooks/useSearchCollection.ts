@@ -1,11 +1,10 @@
-// hooks/useFirestoreCollection.ts
 import { db } from "@/config/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ToastType } from "@/types";
 
-export const useFirestoreCollection = <T>(collectionName: string) => {
+const useSearchCollection = <T>(collectionName: string) => {
   const { user } = useAuth();
   const [data, setData] = useState<T[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,3 +53,5 @@ export const useFirestoreCollection = <T>(collectionName: string) => {
     setData,
   };
 };
+
+export default useSearchCollection;
