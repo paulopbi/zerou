@@ -1,12 +1,12 @@
 <p align="center">
-   <img src="./public/logo-cover.png" width="100%"height="500">
+   <img src="./public/zerou-cover.png">
 </p>
 
 > [You can read it in english, just click here](./README.en.md)
 
 ### 📚 Introdução
 
-O **Game Tracker** é uma aplicação web desenvolvida com **React** que permite aos usuários organizarem e acompanharem seus jogos de maneira prática e personalizada, podendo fazer anotações dos jogos que está jogando de maneira rápida.
+O **Zerou** é uma aplicação web desenvolvida com **React** que permite aos usuários organizarem e acompanharem seus jogos de maneira prática e personalizada, podendo fazer anotações dos jogos que está jogando de maneira rápida.
 
 Com funcionalidades de **CRUD (Criar, Ler, Atualizar e Deletar)**, **animações suaves**, **editor de texto avançado** e **autenticação segura**, é a ferramenta perfeita para quem quer manter anotar toda a sua jogatina.
 
