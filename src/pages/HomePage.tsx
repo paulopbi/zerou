@@ -3,12 +3,12 @@ import { PlusIcon } from "lucide-react";
 import { Link } from "react-router";
 import { useAuth } from "@/contexts/AuthContext";
 import { DatabaseSchemaType } from "@/types";
-import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
 import Navbar from "@/components/Navbar";
 import WithoutGame from "@/components/WithoutGame";
 import GameCard from "@/components/GameCard";
 import Loading from "@/components/Loading";
 import Toast from "@/components/Toast";
+import useSearchCollection from "@/hooks/useSearchCollection";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -17,7 +17,7 @@ const HomePage = () => {
     isLoading,
     systemMessage,
     setData,
-  } = useFirestoreCollection<DatabaseSchemaType>("games");
+  } = useSearchCollection<DatabaseSchemaType>("games");
   return (
     <>
       <Navbar />
