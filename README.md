@@ -1,4 +1,6 @@
-# 🎮 Game Tracker
+<p align="center">
+   <img src="./public/logo-cover.png" width="100%"height="500">
+</p>
 
 > [You can read it in english, just click here](./README.en.md)
 
