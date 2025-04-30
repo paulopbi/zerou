@@ -33,6 +33,10 @@ With features like **CRUD (Create, Read, Update, Delete)** operations, **smooth 
 
 ### 🚀 Live Demo
 
+<p align="center">
+   <img src="./public/zerou-animacao.gif" alt="Gif de demonstração">
+</p>
+
 🔗 [Click here to access the project](https://zerou.vercel.app)
 
 ### 📄 License

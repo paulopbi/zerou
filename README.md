@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="./public/zerou-cover.png">
+   <img src="./public/zerou-cover.png" alt="Capa">
 </p>
 
 > [You can read it in english, just click here](./README.en.md)
@@ -32,6 +32,10 @@ Com funcionalidades de **CRUD (Criar, Ler, Atualizar e Deletar)**, **animações
 - Animações suaves para melhor experiência do usuário.
 
 ### 🚀 Demonstração
+
+<p align="center">
+   <img src="./public/zerou-animacao.gif" alt="Gif de demonstração">
+</p>
 
 🔗 [Clique aqui para acessar o projeto](https://zerou.vercel.app)
 
